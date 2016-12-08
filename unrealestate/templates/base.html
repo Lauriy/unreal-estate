@@ -1,0 +1,104 @@
+{% load i18n static compress %}
+
+<!DOCTYPE HTML>
+<!--
+	Elemental by Pixelarity
+	pixelarity.com | hello@pixelarity.com
+	License: pixelarity.com/license
+-->
+<html>
+<head>
+    <title>{% trans "Unreal Estate" %}</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!--[if lte IE 8]><script src="{% static "js/ie/html5shiv-3.7.3.js" %}"></script><![endif]-->
+    {% compress css %}
+        <link rel="stylesheet" href="{% static "css/main.css" %}"/>
+    {% endcompress %}
+    <!--[if lte IE 9]><link rel="stylesheet" href="{% static "css/ie9.css" %}" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="{% static "css/ie8.css" %}" /><![endif]-->
+</head>
+<body>
+<div id="header" class="alt">
+    <a class="logo" href="{% url "home" %}" title="{% trans "Back to home page" %}">
+        <img alt="{% trans "Unreal Estate logo" %}" src="{% static "images/unreal-estate-logo.png" %}">
+    </a>
+    <nav id="nav">
+        <ul>
+            <li class="{% if request.resolver_match.url_name == "home" %}active{% endif %}">
+                <a title="{% trans "Home page" %}" href="{% url "home" %}">{% trans "Home" %}</a>
+            </li>
+            <li>
+                <a title="{% trans "How it works" %}" href="#content">{% trans "How it works" %}</a>
+            </li>
+            <li class="{% if request.resolver_match.url_name == "about_us" %}active{% endif %}">
+                <a title="{% trans "About us" %}" href="{% url "about_us" %}">{% trans "About Us" %}</a>
+            </li>
+            <li class="{% if request.resolver_match.url_name == "sign_up" %}active{% endif %}">
+                <a title="{% trans "Sign up" %}" href="{% url "sign_up" %}">{% trans "Sign up" %}</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<div id="main">
+    {% block content %}{% endblock %}
+</div>
+<section id="three" class="wrapper style5 special">
+    <div class="inner narrow">
+        <h3 class="major special">{% trans "Earn a current estimated return of 10%* per year, after fees" %}</h3>
+        <p>
+            {% blocktrans %}
+                * Capital at risk. The value of your investment can go down as well as up. Forecasts are not a reliable
+                indicator of future performance. Gross rent and dividends may be lower than estimated.
+            {% endblocktrans %}
+        </p>
+    </div>
+</section>
+<div id="footer">
+    <h2>{% trans "Get in touch" %}</h2>
+    <p>{% trans "Unable to find what you're looking for? We'd love to hear from you." %}</p>
+    <ul class="major-icons">
+        <li>
+            <h3 class="icon fa-phone major">
+                <span class="label">{% trans "Phone" %}</span>
+            </h3>
+            <p>(372) 55-604020</p>
+        </li>
+        <li>
+            <h3 class="icon fa-map major">
+                <span class="label">{% trans "Address" %}</span>
+            </h3>
+            <p>{% blocktrans %}Kiili tn 12-1, 12916<br/>Estonia, Harjumaa, Tallinn{% endblocktrans %}</p>
+        </li>
+        <li>
+            <h3 class="icon fa-envelope major">
+                <span class="label">{% trans "Email" %}</span>
+            </h3>
+            <p><a title="{% trans "Email us" %}" href="mailto:info@unrealestate.ee">info@unrealestate.ee</a></p>
+        </li>
+    </ul>
+    <ul class="joined-icons">
+        <li>
+            <a href="#" title="{% trans "Unreal Estate on Facebook" %}" class="icon fa-facebook">
+                <span class="label">{% trans "Facebook" %}</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" title="{% trans "Unreal Estate on Twitter" %}" class="icon fa-twitter">
+                <span class="label">{% trans "Twitter" %}</span>
+            </a>
+        </li>
+    </ul>
+    <p class="copyright">{% blocktrans %}&copy; Unreal Estate. All rights reserved.{% endblocktrans %}</p>
+</div>
+{% compress js %}
+    <script src="{% static "js/jquery-1.12.4.js" %}"></script>
+    <script src="{% static "js/jquery.dropotron-1.4.3.js" %}"></script>
+    <script src="{% static "js/jquery.scrollex-0.2.1.js" %}"></script>
+    <script src="{% static "js/skel-3.0.1.js" %}"></script>
+    <script src="{% static "js/util.js" %}"></script>
+    <!--[if lte IE 8]><script src="{% static "js/ie/respond-1.4.2.js" %}"></script><![endif]-->
+    <script src="{% static "js/main.js" %}"></script>
+{% endcompress %}
+</body>
+</html>

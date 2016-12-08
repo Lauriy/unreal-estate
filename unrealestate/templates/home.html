@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% load static i18n thumbnail %}
+
+{% block content %}
+    <header>
+        <div class="image">
+            <img alt="{% trans "Unreal Estate logo" %}" title="{% trans "Unreal Estate logo" %}"
+                 src="{% static "images/unreal.png" %}">
+        </div>
+    </header>
+    <section id="one" class="wrapper spotlight">
+        <div class="content">
+            <div class="inner">
+                <h2>{% trans "Online marketplace for real estate" %}</h2>
+                <p align="justify">
+                    {% blocktrans %}
+                        Drawing inspiration from crowdinvesting, we offer a delightful and intuitive avenue
+                        to grow one's wealth by backing attractive aftermarket real estate sales harnessing the power of
+                        group buying.
+                    {% endblocktrans %}
+                </p>
+                <ul class="actions">
+                    <li>
+                        <a href="{% url "about_us" %}" title="{% trans "About us" %}" class="button">{% trans "Learn More" %}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <ul class="grid-icons">
+            <img alt="{% trans "Sample dashboard" %}" title="{% trans "Sample dashboard" %}"
+                 src="{% static 'images/dashboard.png' %}">
+        </ul>
+    </section>
+    <section id="two" class="wrapper style1 spotlight alt">
+        <div class="content">
+            <div class="inner">
+                <h2>{% trans "Nordic house" %}</h2>
+                <p align="justify">Combination of beautiful scenery and great location makes this house worthwhile to
+                    spend quality time in any time of the year. To get better grasp about this property, please enjoy
+                    the possibility of different media features as well as get acquainted with detailed information.</p>
+                <ul class="actions">
+                    <li><a href="project.html" class="button">Learn More</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="image">
+            <img src="images/hauss.jpg" data-position="30% 30%" alt=""/>
+        </div>
+    </section>
+
+    <!-- Three -->
+    <section id="three" class="wrapper style2 spotlight">
+        <div class="content">
+            <div class="inner">
+                <h2>Modern apartment</h2>
+                <p align="justify">This residential area is located in the central part of Singapore. The development
+                    was started in 2015 and most of the designed buildings have been completed and sold. However...</p>
+                <ul class="actions">
+                    <li><a href="signup.html" class="button">Coming soon</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="image">
+            <img src="images/taust.jpg" data-position="center right" alt=""/>
+        </div>
+    </section>
+
+    <!-- Four -->
+    <section id="four" class="wrapper style3 spotlight alt">
+        <div class="content">
+            <div class="inner">
+                <h2>Holiday villa</h2>
+                <p align="justify">This two-storey villa with 6 ensuite bedrooms, private tropical garden, swimming pool
+                    and many verandas is located in Bali, recently voted as the most fascinating place in Asia... </p>
+                <ul class="actions">
+                    <li><a href="signup.html" class="button">Coming soon</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="image">
+            <img src="images/maja6.jpg" data-position="top right" alt=""/>
+        </div>
+    </section>
+    <!-- Five -->
+    <section id="five" class="wrapper special">
+        <h2>{% trans "What we do" %}</h2>
+        <p>
+            {% blocktrans %}
+                Changing the experience of
+                how we make real estate investment decisions.
+            {% endblocktrans %}
+        </p>
+        <ul class="faces">
+            <li>
+                <span class="icon major fa-users style2"></span>
+
+                <h3>Crowdinvest</h3>
+                <p>With the power of group buying, we enable investors to enter the real estate market with small
+                    amounts and allocate funds to achieve the best direct investment risk-reward relationship.</p>
+            </li>
+            <li>
+                <span class="icon major fa-bar-chart style3"></span>
+
+                <h3>Full coverage</h3>
+                <p>We provide transparent and detailed information for each project with additional 3D/VR experience to
+                    make sure our investors are fully engaged.</p>
+            </li>
+            <li>
+                <span class="icon major fa-check-square-o style4"></span>
+
+                <h3>Simple</h3>
+                <p>With userfriendly platform and unbureaucratic approach we offer hassle free real estate investments
+                    to enable you to achieve your personal goals and test differnet strategies.</p>
+            </li>
+        </ul>
+    </section>
+
+    <!-- Content -->
+    <section id="content" class="wrapper style4">
+        <span class="image main"><img src="images/howitworks2.png" alt=""/></span>
+        <div class="image2"><img src="images/reidike.png" alt=""/></div>
+
+    </section>
+
+
+    <!-- One -->
+
+    <section id="one" class="wrapper spotlight">
+        <div class="content">
+            <div class="inner">
+                <h2>Stock market vs real estate</h2>
+                <p align="justify">Graph on the right compares the Asia Pacific REIT index and the Asia Pacific stock
+                    market index. FTSE EPRA/NAREIT Asia Pacific index is designed to track the performance of listed
+                    real estate companies and REITS in both developed and emerging markets. FTSE Asia Pacific index
+                    represents Asia Pacific stock market. The latter helps Asia Pacific investors to benchmark their
+                    investments. It is clearly visible that investing in real estate has turned out to be more
+                    profitable than the stock market.</p>
+                <ul class="actions">
+                    <li><a href="generic.html" class="button">Learn More</a></li>
+                </ul>
+            </div>
+        </div>
+        <ul class="grid-icons">
+
+        </ul>
+    </section>
+{% endblock %}

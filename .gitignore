@@ -1,0 +1,3 @@
+unrealestate/settings/local.py
+static-cache/*.js
+static-cache/*.css
