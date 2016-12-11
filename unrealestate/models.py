@@ -1,8 +1,12 @@
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.contrib.auth.models import AbstractUser
 from django.db.models import Model, CharField, TextField, FileField, ImageField, BooleanField, ForeignKey, \
-    DateTimeField, IntegerField, DecimalField, OneToOneField
+    DateTimeField, IntegerField, DecimalField, SlugField
 from djmoney.models.fields import MoneyField
-from django.contrib.auth.models import User
+
+
+class User(AbstractUser):
+    interest_in_site = ForeignKey('UserInterestInSite', related_name='users', blank=True, null=True)
 
 
 class AssetClass(Model):
@@ -25,8 +29,9 @@ class InvestmentType(Model):
 
 class Project(Model):
     title = CharField(max_length=255)
+    slug = SlugField()
     description = TextField()
-    video = FileField(upload_to='uploads/videos/', null=True, blank=True)
+    video = FileField(upload_to='/media/uploads/videos/', null=True, blank=True)
     is_allowed_on_home_page = BooleanField(default=False)
     goal = MoneyField(max_digits=12, decimal_places=2, default_currency='SGD')
     deadline = DateTimeField()
@@ -49,7 +54,7 @@ class Project(Model):
 
 class ProjectImage(Model):
     project = ForeignKey('Project', related_name='images')
-    image = ImageField(upload_to='uploads/images/')
+    image = ImageField(upload_to='/media/uploads/images/')
     created = DateTimeField(auto_now_add=True)
     modified = DateTimeField(auto_now=True)
 
@@ -57,8 +62,10 @@ class ProjectImage(Model):
         return self.image.name
 
 
-# class Profile(Model):
-#     user = OneToOneField(User)
-#
-#     def __str__(self):
-#         return self.user.username
+class UserInterestInSite(Model):
+    name = CharField(max_length=255)
+    created = DateTimeField(auto_now_add=True)
+    modified = DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name

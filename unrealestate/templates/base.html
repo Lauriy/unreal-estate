@@ -34,26 +34,28 @@
             <li class="{% if request.resolver_match.url_name == "about_us" %}active{% endif %}">
                 <a title="{% trans "About us" %}" href="{% url "about_us" %}">{% trans "About Us" %}</a>
             </li>
-            <li class="{% if request.resolver_match.url_name == "sign_up" %}active{% endif %}">
-                <a title="{% trans "Sign up" %}" href="{% url "sign_up" %}">{% trans "Sign up" %}</a>
-            </li>
+            {% if user.is_authenticated %}
+                <li class="{% if request.resolver_match.url_name == "account_profile" %}active{% endif %}">
+                    <a title="{% trans "My profile" %}" href="{% url "account_profile" %}">{% trans "My profile" %}</a>
+                </li>
+                <li class="{% if request.resolver_match.url_name == "account_logout" %}active{% endif %}">
+                    <a title="{% trans "Log out" %}" href="{% url "account_logout" %}">{% trans "Log out" %}</a>
+                </li>
+            {% else %}
+                <li class="{% if request.resolver_match.url_name == "account_signup" %}active{% endif %}">
+                    <a title="{% trans "Sign up" %}" href="{% url "account_signup" %}">{% trans "Sign up" %}</a>
+                </li>
+                <li class="{% if request.resolver_match.url_name == "account_login" %}active{% endif %}">
+                    <a title="{% trans "Log in" %}" href="{% url "account_login" %}">{% trans "Log in" %}</a>
+                </li>
+            {% endif %}
         </ul>
     </nav>
 </div>
 <div id="main">
     {% block content %}{% endblock %}
 </div>
-<section id="three" class="wrapper style5 special">
-    <div class="inner narrow">
-        <h3 class="major special">{% trans "Earn a current estimated return of 10%* per year, after fees" %}</h3>
-        <p>
-            {% blocktrans %}
-                * Capital at risk. The value of your investment can go down as well as up. Forecasts are not a reliable
-                indicator of future performance. Gross rent and dividends may be lower than estimated.
-            {% endblocktrans %}
-        </p>
-    </div>
-</section>
+{% block before_footer %}{% endblock %}
 <div id="footer">
     <h2>{% trans "Get in touch" %}</h2>
     <p>{% trans "Unable to find what you're looking for? We'd love to hear from you." %}</p>
@@ -100,5 +102,6 @@
     <!--[if lte IE 8]><script src="{% static "js/ie/respond-1.4.2.js" %}"></script><![endif]-->
     <script src="{% static "js/main.js" %}"></script>
 {% endcompress %}
+{% block extra_js %}{% endblock %}
 </body>
 </html>

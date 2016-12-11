@@ -22,7 +22,8 @@
                 </p>
                 <ul class="actions">
                     <li>
-                        <a href="{% url "about_us" %}" title="{% trans "About us" %}" class="button">{% trans "Learn More" %}</a>
+                        <a href="{% url "about_us" %}" title="{% trans "About us" %}"
+                           class="button">{% trans "Learn More" %}</a>
                     </li>
                 </ul>
             </div>
@@ -32,24 +33,29 @@
                  src="{% static 'images/dashboard.png' %}">
         </ul>
     </section>
-    <section id="two" class="wrapper style1 spotlight alt">
-        <div class="content">
-            <div class="inner">
-                <h2>{% trans "Nordic house" %}</h2>
-                <p align="justify">Combination of beautiful scenery and great location makes this house worthwhile to
-                    spend quality time in any time of the year. To get better grasp about this property, please enjoy
-                    the possibility of different media features as well as get acquainted with detailed information.</p>
-                <ul class="actions">
-                    <li><a href="project.html" class="button">Learn More</a></li>
-                </ul>
+    {% for project in sample_projects %}
+        <section class="wrapper style1 spotlight alt">
+            <div class="content">
+                <div class="inner">
+                    <h2>{{ project.title }}</h2>
+                    <p align="justify">{{ project.description }}</p>
+                    <ul class="actions">
+                        <li>
+                            <a href="{% url 'project_detail_slug' project.id project.slug %}"
+                               title="{{ project.title }}" class="button">{% trans "Learn More" %}</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="image">
-            <img src="images/hauss.jpg" data-position="30% 30%" alt=""/>
-        </div>
-    </section>
-
-    <!-- Three -->
+            <div class="image">
+                {% thumbnail project.images.all.0 "500x500" crop="center" as im %}
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ project.title }}"
+                         title="{{ project.title }}">
+                {% endthumbnail %}
+            </div>
+        </section>
+    {% endfor %}
+    {% comment %}<!-- Three -->
     <section id="three" class="wrapper style2 spotlight">
         <div class="content">
             <div class="inner">
@@ -81,7 +87,7 @@
         <div class="image">
             <img src="images/maja6.jpg" data-position="top right" alt=""/>
         </div>
-    </section>
+    </section>{% endcomment %}
     <!-- Five -->
     <section id="five" class="wrapper special">
         <h2>{% trans "What we do" %}</h2>
@@ -144,5 +150,20 @@
         <ul class="grid-icons">
 
         </ul>
+    </section>
+{% endblock %}
+
+{% block before_footer %}
+    <section id="three" class="wrapper style5 special">
+        <div class="inner narrow">
+            <h3 class="major special">{% trans "Earn a current estimated return of 10%* per year, after fees" %}</h3>
+            <p>
+                {% blocktrans %}
+                    * Capital at risk. The value of your investment can go down as well as up. Forecasts are not a
+                    reliable
+                    indicator of future performance. Gross rent and dividends may be lower than estimated.
+                {% endblocktrans %}
+            </p>
+        </div>
     </section>
 {% endblock %}

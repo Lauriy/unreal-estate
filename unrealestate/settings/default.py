@@ -25,7 +25,8 @@ INSTALLED_APPS = [
     'unrealestate',
     'allauth',
     'allauth.account',
-    'allauth.socialaccount.providers.facebook',
+    # TODO: Re-enable once we have an app registered
+    # 'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount',
     'compressor',
@@ -132,3 +133,10 @@ EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'laurileet@gmail.com'
 EMAIL_HOST_PASSWORD = ''
 DEFAULT_FROM_EMAIL = 'Unreal Estate <info@unrealestate.sg>'
+
+AUTH_USER_MODEL = 'unrealestate.User'
+
+SAMPLE_PROJECTS_ON_HOME_PAGE = 3
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, '../media')

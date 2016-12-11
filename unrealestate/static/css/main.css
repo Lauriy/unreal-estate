@@ -1704,7 +1704,7 @@
 
 	p {
 		margin: 0 0 2em 0;
-	
+
 	}
 
 	h1, h2, h3, h4, h5, h6 {
@@ -2310,12 +2310,12 @@
 		.icon.major {
 			display: block;
 			margin: 0 0 0.5em 0;
-			
+
 		}
 
 			.icon.major:before {
 				font-size: 3em;
-				
+
 			}
 
 			@media screen and (max-width: 736px) {
@@ -2350,7 +2350,7 @@
 			width:300px;
 			position:relative;
 			margin:auto;
-			
+
 		}
 
 		.image.left, .image.right {
@@ -2401,16 +2401,16 @@
 
 			}
 .image2 {
-		
+
 		display: block;
 		position: relative;
 		width:75%;
 	}
 
 		.image2 img {
-			
+
 			display: block;
-			
+
 			position:relative;
 			margin:auto;
 			 -moz-transform: scaleX(-1);
@@ -2419,10 +2419,10 @@
         transform: scaleX(-1);
         filter: FlipH;
         -ms-filter: "FlipH";
-		
+
 		width:100%;
-		
-			
+
+
 		}
 
 		.image2.left, .image2.right {
@@ -3986,7 +3986,7 @@ background:-webkit-radial-gradient(circle, #3a7d9a, #2b2463);
 					border-width: 0px;
 					border-top-width: 0px;
 					display:none;
-					
+
 				}
 
 				.wrapper.spotlight > .content + .image {
@@ -4116,7 +4116,7 @@ background:-webkit-radial-gradient(circle, #3a7d9a, #2b2463);
 			margin: 0;
 			white-space: nowrap;
 			width:230px;
-			
+
 		}
 
 			#header > .logo:before {

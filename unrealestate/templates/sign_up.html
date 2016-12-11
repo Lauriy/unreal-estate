@@ -1,147 +1,54 @@
-<!DOCTYPE HTML>
-<!--
-	Elemental by Pixelarity
-	pixelarity.com | hello@pixelarity.com
-	License: pixelarity.com/license
--->
-<html>
-	<head>
-		<title>Generic - Elemental by Pixelarity</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/signup.css" />
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-	</head>
-	<body>
+{% extends "base.html" %}
 
-		<!-- Header -->
-			<div id="header" class="alt">
-				<a class="logo" href="index.html"><img src="images/ue.png"></a>
-	
-				<nav id="nav">
-					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="index.html#content">How it works</a></li>
-						<li><a href="generic.html">About Us</a></li>
-						<li class="active"><a href="signup.html">Sign Up</a></li>
-					</ul>
-				</nav>
-			</div>
+{% load i18n static %}
 
-
-		<!-- Main -->
-			<div id="main">
-
-				<!-- Header -->
-					<header>
-						<h1>Sign Up</h1>
-					</header>
-
-				<!-- Content -->
-					<section id="content" class="wrapper">
-						<span class="image main"><img src="images/pic041.jpg" alt="" /></span>
-						
-					</section>
-
-			<!-- Sign Up -->
+{% block content %}
+    <div id="main">
+        <header>
+            <h1>{% trans "Sign up" %}</h1>
+        </header>
+        <section id="content" class="wrapper">
+            <span class="image main">
+                <img src="{% static "images/unreal-estate-sign-up.jpg" %}"
+                     title="{% trans "Signing up for Unreal Estate" %}" alt="{% trans "Sign up page illustration" %}"/>
+            </span>
+        </section>
         <section>
-					<article id="signup" class="panel secondary">
-						
-						<div class="content">
-														<div class="inner">
-								<header>
-									<h2>Get started</h2>
-								</header>
-								<form name="signup" method="post" action="signup.php">
-									<div class="field half first">
-										<label for="name">First name</label>
-										<input type="text" name="name" id="fname" />
-									</div>
-									<div class="field half">
-										<label for="email">Last name</label>
-										<input type="text" name="name" id="lname" />
-									</div>
-									<div class="field half first">
-										<label for="name">Email</label>
-										<input type="email" name="email" id="email" />
-									</div>
-									<div class="field half">
-										<label for="investor">Your interest</label>
-                                        <form>
-                                        <select type="checkbox" id="investor" name="investor">
-                                            <option value="IN">Investor</option>
-                                            <option value="PO">Property owner</option>
-                                        </select>
-                                        </form>
-                                        </div>
-									<ul class="actions">
-										<li><a href="signupty.html" class="button submit">SIGN UP</a></li>
-									</ul>
-								</form>
-							
-                            	<p>OR LEAVE YOUR CONTACTS VIA GOOGLE</p>
-                                                           
-									<ul class="actions">
-										<div class="g-signin2" data-onsuccess="onSignIn"
-                                             function onSignIn(googleUser) {
-  var profile = googleUser.getBasicProfile();
-  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-  console.log('Name: ' + profile.getName());
-  console.log('Image URL: ' + profile.getImageUrl());
-  console.log('Email: ' + profile.getEmail());
-}></div>
-									</ul>
-                         </div>
-								</div>
-								
-					</article>
-</section>
-	
+            <article id="signup" class="panel secondary">
+                <div class="content">
+                    <div class="inner">
+                        <header>
+                            <h2>{% trans "Get started" %}</h2>
+                        </header>
+                        <form name="signup" method="post" action="signup.php">
+                            <div class="field half first">
+                                <label for="name">First name</label>
+                                <input type="text" name="name" id="fname"/>
+                            </div>
+                            <div class="field half">
+                                <label for="email">Last name</label>
+                                <input type="text" name="name" id="lname"/>
+                            </div>
+                            <div class="field half first">
+                                <label for="name">Email</label>
+                                <input type="email" name="email" id="email"/>
+                            </div>
+                            <div class="field half">
+                                <label for="investor">Your interest</label>
+                                <form>
+                                    <select type="checkbox" id="investor" name="investor">
+                                        <option value="IN">Investor</option>
+                                        <option value="PO">Property owner</option>
+                                    </select>
+                                </form>
+                            </div>
+                            <ul class="actions">
+                                <li><a href="signupty.html" class="button submit">SIGN UP</a></li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </article>
+        </section>
     </div>
-    
-
-
-
-		<!-- Footer -->
-				<div id="footer">
-				<h2>Get in touch</h2>
-				<p>Unable to find what you're looking for? We'd love to hear from you.</p>
-				<ul class="major-icons">
-					<li>
-						<h3 class="icon fa-phone major"><span class="label">Phone</span></h3>
-						<p>(372) 55-604020</p>
-					</li>
-					<li>
-						<h3 class="icon fa-map major"><span class="label">Address</span></h3>
-						<p>Kiili tn 12-1, 12916<br />
-						Estonia, Harjumaa, Tallinn </p>
-					</li>
-					<li>
-						<h3 class="icon fa-envelope major"><span class="label">Email</span></h3>
-						<p><a href="#">info@unrealestate.ee</a></p>
-					</li>
-				</ul>
-				<ul class="joined-icons">
-					<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-					<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
-					<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-					<li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-				</ul>
-				<p class="copyright">&copy; Untitled. All rights reserved.</p>
-			</div>
-
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
-
-	</body>
-</html>
+{% endblock %}

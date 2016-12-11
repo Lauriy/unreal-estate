@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% load i18n thumbnail static compress %}
+
+{% block extra_js %}
+    {% compress js %}
+        <script src="{% static "js/jquery.scrollgress-1.0.0.js" %}"></script>
+    {% endcompress %}
+    <script src="{% static "js/jquery.scrolly-1.0.0-dev.min.js" %}"></script>
+    <script src="{% static "js/jquery.slidertron-1.4.1-dev.min.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+    <header>
+        <h1>{{ object.title }}</h1>
+    </header>
+    <section id="one" class="wrapper style1">
+        <div class="container">
+            <header class="major"><h2>{% trans "General information" %}</h2>
+                <p align="justify">
+                    {% blocktrans %}
+                        This lovely house is located on the outskirts of Stockholm. Combination of beautiful
+                        scenery and great location makes this house worthwhile to spend quality time in any time of the
+                        year. To get better grasp about this property, please enjoy the possibility of different media
+                        features as well as get acquainted with detailed information.
+                    {% endblocktrans %}
+                </p>
+            </header>
+            {% if object.video %}
+                <div class="video">
+                    <video title="{{ object.title }}" src="{{ object.video.url }}" controls></video>
+                </div>
+            {% endif %}
+            <div class="slider">
+                <span class="nav-previous"></span>
+                <div class="viewer">
+                    <div class="reel">
+                        {% for image in object.images.all %}
+                            <div class="slide">
+                                {% thumbnail image "840x455" crop="center" as im %}
+                                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"
+                                         alt="{{ object.title }}" title="{{ object.title }}">
+                                {% endthumbnail %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <span class="nav-next"></span>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Five -->
+    <section id="five" class="wrapper style2">
+        <ul class="faces">
+            <li>
+                <span class="image"><img src="images/pic05.jpg" alt=""/></span>
+                <h3>Goal</h3>
+                <p>400 000 EUR</p>
+            </li>
+
+            <li>
+                <span class="image"><img src="images/pic07.jpg" alt=""/></span>
+                <h3>Deadline</h3>
+                <p>20.12.2016</p>
+            </li>
+            <li>
+                <span class="image"><img src="images/pic07.jpg" alt=""/></span>
+                <h3>Asset class</h3>
+                <p>Residential</p>
+
+        </ul>
+    </section>
+    <!-- Five -->
+    <section id="five" class="wrapper style2">
+        <ul class="faces">
+            <li>
+                <span class="image"><img src="images/pic05.jpg" alt=""/></span>
+                <h3>Investment type</h3>
+                <p>Equity</p>
+            </li>
+            <li>
+                <span class="image"><img src="images/pic06.jpg" alt=""/></span>
+                <h3>Investment period</h3>
+                <p>3 years</p>
+            </li>
+
+            <li>
+                <span class="image"><img src="images/pic07.jpg" alt=""/></span>
+                <h3>Expected rate of return</h3>
+                <p>11%</p>
+
+        </ul>
+    </section>
+
+
+
+    <!-- Three -->
+    <section id="three" class="wrapper style1">
+        <div class="container">
+            <header class="major"><h2>Information tabs</h2>
+                <p>Please refer to the below tabs to get more information about the project from every aspect.</p>
+            </header>
+            <div class="row">
+                <div class="4u 6u(medium) 12u$(small)">
+                    <article class="box post"><a href="#" class="image fit"><img src="images/sinine.jpg" alt=""/></a>
+                        <h3>General</h3>
+                        <p>Name - Nordic House, Address - Kastellet, 18599, Sweden, Size - 500m2</p>
+
+                        <ul class="actions">
+                            <li><a href="#" class="button">Learn More</a></li>
+                        </ul>
+                    </article>
+                </div>
+                <div class="4u 6u$(medium) 12u$(small)">
+                    <article class="box post"><a href="#" class="image fit"><img src="images/bees.jpg" alt=""/></a>
+                        <h3>Location</h3>
+                        <p>About 20km from Stockholm city center, this beautiful vacation home has ...</p>
+                        <ul class="actions">
+                            <li><a href="#" class="button">Learn More</a></li>
+                        </ul>
+                    </article>
+                </div>
+                <div class="4u$ 6u(medium) 12u$(small)">
+                    <article class="box post"><a href="#" class="image fit"><img src="images/tumesinine.jpg"
+                                                                                 alt=""/></a>
+                        <h3>Market</h3>
+                        <p>The demand for new developments continues to be strong. This, however, can...</p>
+                        <ul class="actions">
+                            <li><a href="#" class="button">Learn More</a></li>
+                        </ul>
+                    </article>
+                </div>
+                <div class="4u 6u$(medium) 12u$(small)">
+                    <article class="box post"><a href="#" class="image fit"><img src="images/bees.jpg" alt=""/></a>
+                        <h3>Project Analysis</h3>
+                        <p>In this section you can find the SWOT analysis of this project. Both internal and external
+                            factors have been taken into account to thoroughly assess different attributes of...</p>
+                        <ul class="actions">
+                            <li><a href="#" class="button">Learn More</a></li>
+                        </ul>
+                    </article>
+                </div>
+                <div class="4u 6u(medium) 12u$(small)">
+                    <article class="box post"><a href="#" class="image fit"><img src="images/tumesinine.jpg"
+                                                                                 alt=""/></a>
+                        <h3>Financials</h3>
+                        <p>The project investment returns are estimated and are subject to influences of the overall
+                            economic situation and supply/demand relationship. Detailed ...</p>
+                        <ul class="actions">
+                            <li><a href="#" class="button">Learn More</a></li>
+                        </ul>
+                    </article>
+                </div>
+                <div class="4u$ 6u$(medium) 12u$(small)">
+                    <article class="box post"><a href="#" class="image fit"><img src="images/sinine.jpg" alt=""/></a>
+                        <h3>Related Documents</h3>
+                        <p>Below you can find supporting documents of the project providing additional information not
+                            stated elsewhere. In order to gain more trust in investors, other legal and ...</p>
+                        <ul class="actions">
+                            <li><a href="#" class="button">Learn More</a></li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section><!-- CTA -->
+    <section id="cta" class="wrapper style3">
+        <ul class="actions">
+            <li><a href="signup.html" class="button big">Invest</a>
+        </ul>
+    </section>
+
+{% endblock %}
