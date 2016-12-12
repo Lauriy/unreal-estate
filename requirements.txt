@@ -9,3 +9,4 @@ django-contrib-comments==1.7.3
 django-comments-xtd==1.6.3
 six==1.10.0
 django-markup==1.1
+uWSGI=2.0.14

@@ -3,6 +3,8 @@ upstream unrealestate_app_server {
 }
 
 server {
+    listen 80 default_server;
+
     server_name www.unrealestate.sg unrealestate.sg;
 
     keepalive_timeout 10;
