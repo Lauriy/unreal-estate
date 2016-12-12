@@ -1,0 +1,16 @@
+[program:unrealestate]
+directory=/home/unrealestate/unrealestate-web
+command=/home/unrealestate/unrealestate-web/venv/bin/uwsgi
+  --socket=/home/unrealestate/unrealestate-web/unrealestate.sock
+  --module=unrealestate.wsgi
+  --chmod-socket=777
+  --env LANG="en_US.utf8"
+  --processes=1
+  --master
+  --harakiri=180
+  --max-requests=50
+autostart=true
+autorestart=true
+user=unrealestate
+stopasgroup=true
+environment=DJANGO_SETTINGS_MODULE="unrealestate.settings.local"

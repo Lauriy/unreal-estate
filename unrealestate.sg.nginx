@@ -1,0 +1,63 @@
+upstream unrealestate_app_server {
+    server unix:///home/unrealestate/unrealestate-web/unrealestate.sock;
+}
+
+server {
+    server_name www.unrealestate.sg unrealestate.sg;
+
+    keepalive_timeout 10;
+
+    client_max_body_size 20M;
+
+    location /static {
+        alias /home/unrealestate/unrealestate-web/static-cache;
+        expires 7d;
+    }
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass unrealestate_app_server;
+    }
+}
+
+#server {
+#    server_name www.unrealestate.sg unrealestate.sg;
+#    return 301 https://$host$request_uri;
+#}
+#
+#server {
+#    listen 443;
+#    ssl on;
+#
+#    ssl_certificate /home/unrealestate/unrealestate_sg_bundle.crt;
+#    ssl_certificate_key /home/unrealestate/unrealestate_sg.key;
+#
+#    server_name www.unrealestate.sg
+#    return 301 https://unrealestate.sg$request_uri;
+#}
+#
+#server {
+#    server_name unrealestate.sg;
+#    listen 443 ssl;
+#
+#    client_max_body_size 20M;
+#
+#    ssl_certificate /home/unrealestate/unrealestate_sg_bundle.crt;
+#    ssl_certificate_key /home/unrealestate/unrealestate_sg.key;
+#
+#    if ($host !~* ^(unrealestate.sg)$ ) {
+#        return 444;
+#    }
+#
+#    keepalive_timeout 30;
+#
+#    location /static {
+#        alias /home/unrealestate/unrealestate-web/static-cache;
+#        expires 7d;
+#    }
+#
+#    location / {
+#        include uwsgi_params;
+#        uwsgi_pass unrealestate_app_server;
+#    }
+#}
