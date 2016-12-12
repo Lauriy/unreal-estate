@@ -36,7 +36,7 @@
                     <div class="reel">
                         {% for image in object.images.all %}
                             <div class="slide">
-                                {% thumbnail image "840x455" crop="center" as im %}
+                                {% thumbnail image "x345" crop="center" as im %}
                                     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"
                                          alt="{{ object.title }}" title="{{ object.title }}">
                                 {% endthumbnail %}
@@ -48,63 +48,69 @@
             </div>
         </div>
     </section>
-
-
-    <!-- Five -->
     <section id="five" class="wrapper style2">
         <ul class="faces">
             <li>
-                <span class="image"><img src="images/pic05.jpg" alt=""/></span>
-                <h3>Goal</h3>
-                <p>400 000 EUR</p>
-            </li>
-
-            <li>
-                <span class="image"><img src="images/pic07.jpg" alt=""/></span>
-                <h3>Deadline</h3>
-                <p>20.12.2016</p>
+                <span class="image">
+                    <img class="unrealestate-project-circle" src="{% static "images/pic05.jpg" %}"
+                         alt="{% trans "Goal" %}"/>
+                </span>
+                <h3>{% trans "Goal" %}</h3>
+                <p>{{ object.goal }}</p>
             </li>
             <li>
-                <span class="image"><img src="images/pic07.jpg" alt=""/></span>
-                <h3>Asset class</h3>
-                <p>Residential</p>
-
+                <span class="image">
+                    <img class="unrealestate-project-circle" src="{% static "images/pic07.jpg" %}"
+                         alt="{% trans "Deadline" %}"/>
+                </span>
+                <h3>{% trans "Deadline" %}</h3>
+                <p>{{ object.deadline }}</p>
+            </li>
+            <li>
+                <span class="image">
+                    <img class="unrealestate-project-circle" src="{% static "images/pic07.jpg" %}"
+                         alt="{% trans "Asset class" %}"/>
+                </span>
+                <h3>{% trans "Asset class" %}</h3>
+                <p>{{ object.asset_class }}</p>
         </ul>
     </section>
-    <!-- Five -->
     <section id="five" class="wrapper style2">
         <ul class="faces">
             <li>
-                <span class="image"><img src="images/pic05.jpg" alt=""/></span>
-                <h3>Investment type</h3>
-                <p>Equity</p>
+                <span class="image">
+                    <img class="unrealestate-project-circle" src="{% static "images/pic05.jpg" %}"
+                         alt="{% trans "Investment type" %}"/>
+                </span>
+                <h3>{% trans "Investment type" %}</h3>
+                <p>{{ object.investment_type }}</p>
             </li>
             <li>
-                <span class="image"><img src="images/pic06.jpg" alt=""/></span>
-                <h3>Investment period</h3>
-                <p>3 years</p>
+                <span class="image"><img class="unrealestate-project-circle" src="{% static "images/pic06.jpg" %}" alt="{% trans "Investment period" %}"/></span>
+                <h3>{% trans "Investment period" %}</h3>
+                <p>{% blocktrans with months=object.investment_period_months  %}{{ months }} months{% endblocktrans %}</p>
             </li>
-
             <li>
-                <span class="image"><img src="images/pic07.jpg" alt=""/></span>
-                <h3>Expected rate of return</h3>
-                <p>11%</p>
-
+                <span class="image">
+                    <img class="unrealestate-project-circle" src="{% static "images/pic07.jpg" %}" alt="{% trans "Expected rate of return" %}"/>
+                </span>
+                <h3>{% trans "Expected rate of return" %}</h3>
+                <p>{{ object.expected_rate_of_return }}%</p>
         </ul>
     </section>
-
-
-
-    <!-- Three -->
     <section id="three" class="wrapper style1">
         <div class="container">
-            <header class="major"><h2>Information tabs</h2>
-                <p>Please refer to the below tabs to get more information about the project from every aspect.</p>
+            <header class="major"><h2>{% trans "Information tabs" %}</h2>
+                <p>
+                    {% blocktrans %}
+                        Please refer to the below tabs to get more information about the project from every aspect.
+                    {% endblocktrans %}
+                </p>
             </header>
             <div class="row">
                 <div class="4u 6u(medium) 12u$(small)">
-                    <article class="box post"><a href="#" class="image fit"><img src="images/sinine.jpg" alt=""/></a>
-                        <h3>General</h3>
+                    <article class="box post"><a href="#" class="image fit"><img src="{% static "images/sinine.jpg" %}" alt="{% trans "General" %}"/></a>
+                        <h3>{% trans "General" %}</h3>
                         <p>Name - Nordic House, Address - Kastellet, 18599, Sweden, Size - 500m2</p>
 
                         <ul class="actions">

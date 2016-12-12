@@ -1,162 +1,84 @@
-<!DOCTYPE HTML>
-<!--
-	Elemental by Pixelarity
-	pixelarity.com | hello@pixelarity.com
-	License: pixelarity.com/license
--->
-<html>
-	<head>
-		<title>Generic - Elemental by Pixelarity</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/generic.css" />
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-	</head>
-	<body>
+{% extends "base.html" %}
 
-		<!-- Header -->
-			<div id="header" class="alt">
-				<a class="logo" href="index.html"><img src="images/ue.png"></a>
-	
-				<nav id="nav">
-					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="index.html#content">How it works</a>
-							</li>
-							
-						<li class ="active"><a href="generic.html">About Us</a></li>
-						<li><a href="signup.html">Sign Up</a></li>
-					</ul>
-				</nav>
-			</div>
+{% block content %}
+    <!-- Header -->
+    <header>
+        <h1>About Us</h1>
+    </header>
 
-
-		<!-- Main -->
-			<div id="main">
-
-				<!-- Header -->
-					<header>
-						<h1>About Us</h1>
-					</header>
-
-				<!-- Content -->
-					<section id="content" class="wrapper">
-						<span class="image main"><img src="images/foto1.jpg" alt="" /></span>
-						<h2>Expanding on real estate investments</h2>
-						<p align="justify">Aftermarket real-estate may offer great investment
-opportunity, but comes with hassles for buyers and
-sellers. Real estate is an emotional, engaging and
-tangible asset class, but it is presented and sold in
-uninspiring ways. How might real estate investors
-get a better chance to connect with the investments
-they make, and know what they are putting their
-money into without much manual due diligence?
-</p>
-						<p align="justify">Taking the experience economy to experiential
-asset classes like real estate is a no brainer. It
-is time we break down big financial decisions
-into smaller, digestible chunks that allow us to
-better diversify our assets and enjoy investing
-by exploring the tangible side of where we put
-our money. It is ironic how much we care about
-experience in the small things we purchase everyday,
-yet how willingly we accept a subpar
-experience whenever large sums of money are
-involved? Turning big financial decisions such
-as investing in real estate into small and more
-exciting chunks that come more naturally to us
-is a tremendous and little-exploited opportunity.</p>
-						<p align="justify">Drawing inspiration from crowdfunding, virtual
-reality technology and the inherent preference
-in Asia for real estate investment, unrealestate
-offers a delightful and intuitive avenue to grow
-one's wealth by backing attractive aftermarket
-real estate sales harnessing the power of group
-buying. This empowers anyone to own a piece
-of desirable real estate, be it a holiday home or
-a high-end condomimium downtown and earn
-rental income on it immediately. Also, investors
-have the opportunity to take advantage of the
-healthy returns on real estate commonly seen
-in Asia. Virtual walkthroughs facilitate property
-evaluation and build an emotional connection
-between asset and the group of buyers. Crowd
-based decision-making and an aftermarket for
-ionvestors to sell their stakes to oher users help
-make investments in property highly tradable,
-with the additional intangible benefit of owning
-a high-status, lifestyle asset class.
-</p>
-					</section>
-
-			
-
-<!-- Five -->
-					<section id="five" class="wrapper special">
-						<h2>Our team</h2>
-					
-						<ul class="faces">
-							<li>
-								<span class="image"><img src="images/pic05.jpg" alt="" /></span>
-								<h3>Karl Vaan</h3>
-								<p>Chief Executive Officer</p>
-							</li>
-							<li>
-								<span class="image"><img src="images/pic06.jpg" alt="" /></span>
-								<h3>Taavi Pettai</h3>
-								<p>Chief Operating Officer</p>
-							</li>
-							<li>
-								<span class="image"><img src="images/pic07.jpg" alt="" /></span>
-								<h3>Timo Kaus</h3>
-								<p>Chief Sales Officer</p>
-							</li>
-						</ul>
-					</section>
-
-</div>
+    <!-- Content -->
+    <section id="content" class="wrapper">
+        <span class="image main"><img src="images/foto1.jpg" alt=""/></span>
+        <h2>Expanding on real estate investments</h2>
+        <p align="justify">Aftermarket real-estate may offer great investment
+            opportunity, but comes with hassles for buyers and
+            sellers. Real estate is an emotional, engaging and
+            tangible asset class, but it is presented and sold in
+            uninspiring ways. How might real estate investors
+            get a better chance to connect with the investments
+            they make, and know what they are putting their
+            money into without much manual due diligence?
+        </p>
+        <p align="justify">Taking the experience economy to experiential
+            asset classes like real estate is a no brainer. It
+            is time we break down big financial decisions
+            into smaller, digestible chunks that allow us to
+            better diversify our assets and enjoy investing
+            by exploring the tangible side of where we put
+            our money. It is ironic how much we care about
+            experience in the small things we purchase everyday,
+            yet how willingly we accept a subpar
+            experience whenever large sums of money are
+            involved? Turning big financial decisions such
+            as investing in real estate into small and more
+            exciting chunks that come more naturally to us
+            is a tremendous and little-exploited opportunity.</p>
+        <p align="justify">Drawing inspiration from crowdfunding, virtual
+            reality technology and the inherent preference
+            in Asia for real estate investment, unrealestate
+            offers a delightful and intuitive avenue to grow
+            one's wealth by backing attractive aftermarket
+            real estate sales harnessing the power of group
+            buying. This empowers anyone to own a piece
+            of desirable real estate, be it a holiday home or
+            a high-end condomimium downtown and earn
+            rental income on it immediately. Also, investors
+            have the opportunity to take advantage of the
+            healthy returns on real estate commonly seen
+            in Asia. Virtual walkthroughs facilitate property
+            evaluation and build an emotional connection
+            between asset and the group of buyers. Crowd
+            based decision-making and an aftermarket for
+            ionvestors to sell their stakes to oher users help
+            make investments in property highly tradable,
+            with the additional intangible benefit of owning
+            a high-status, lifestyle asset class.
+        </p>
+    </section>
 
 
-		<!-- Footer -->
-					<div id="footer">
-				<h2>Get in touch</h2>
-				<p>Unable to find what you're looking for? We'd love to hear from you.</p>
-				<ul class="major-icons">
-					<li>
-						<h3 class="icon fa-phone major"><span class="label">Phone</span></h3>
-						<p>(372) 55-604020</p>
-					</li>
-					<li>
-						<h3 class="icon fa-map major"><span class="label">Address</span></h3>
-						<p>Kiili tn 12-1, 12916<br />
-						Estonia, Harjumaa, Tallinn </p>
-					</li>
-					<li>
-						<h3 class="icon fa-envelope major"><span class="label">Email</span></h3>
-						<p><a href="#">info@unrealestate.ee</a></p>
-					</li>
-				</ul>
-				<ul class="joined-icons">
-					<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-					<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
-					<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-					<li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-				</ul>
-				<p class="copyright">&copy; Untitled. All rights reserved.</p>
-			</div>
 
+    <!-- Five -->
+    <section id="five" class="wrapper special">
+        <h2>Our team</h2>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
+        <ul class="faces">
+            <li>
+                <span class="image"><img src="images/pic05.jpg" alt=""/></span>
+                <h3>Karl Vaan</h3>
+                <p>Chief Executive Officer</p>
+            </li>
+            <li>
+                <span class="image"><img src="images/pic06.jpg" alt=""/></span>
+                <h3>Taavi Pettai</h3>
+                <p>Chief Operating Officer</p>
+            </li>
+            <li>
+                <span class="image"><img src="images/pic07.jpg" alt=""/></span>
+                <h3>Timo Kaus</h3>
+                <p>Chief Sales Officer</p>
+            </li>
+        </ul>
+    </section>
 
-	</body>
-</html>
+{% endblock %}

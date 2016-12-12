@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="image">
-                {% thumbnail project.images.all.0 "500x500" crop="center" as im %}
+                {% thumbnail project.images.first "500x500" crop="center" as im %}
                     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ project.title }}"
                          title="{{ project.title }}">
                 {% endthumbnail %}
