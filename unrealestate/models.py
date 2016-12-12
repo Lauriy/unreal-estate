@@ -31,7 +31,7 @@ class Project(Model):
     title = CharField(max_length=255)
     slug = SlugField()
     description = TextField()
-    video = FileField(upload_to='media/uploads/videos/', null=True, blank=True)
+    video = FileField(upload_to='uploads/videos/', null=True, blank=True)
     is_allowed_on_home_page = BooleanField(default=False)
     goal = MoneyField(max_digits=12, decimal_places=2, default_currency='SGD')
     deadline = DateTimeField()
@@ -54,7 +54,7 @@ class Project(Model):
 
 class ProjectImage(Model):
     project = ForeignKey('Project', related_name='images')
-    image = ImageField(upload_to='media/uploads/images/')
+    image = ImageField(upload_to='uploads/images/')
     created = DateTimeField(auto_now_add=True)
     modified = DateTimeField(auto_now=True)
 
