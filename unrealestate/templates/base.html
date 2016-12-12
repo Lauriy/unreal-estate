@@ -13,7 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <!--[if lte IE 8]><script src="{% static "js/ie/html5shiv-3.7.3.js" %}"></script><![endif]-->
     {% compress css %}
-        <link rel="stylesheet" href="{% static "css/main.css" %}"/>
+        <link rel="stylesheet" href="{% static "css/pixelarity.css" %}"/>
+        <link rel="stylesheet" href="{% static "css/custom.css" %}"/>
     {% endcompress %}
     <!--[if lte IE 9]><link rel="stylesheet" href="{% static "css/ie9.css" %}" /><![endif]-->
     <!--[if lte IE 8]><link rel="stylesheet" href="{% static "css/ie8.css" %}" /><![endif]-->
@@ -21,7 +22,7 @@
 <body>
 <div id="header" class="alt">
     <a class="logo" href="{% url "home" %}" title="{% trans "Back to home page" %}">
-        <img alt="{% trans "Unreal Estate logo" %}" src="{% static "images/unreal-estate-logo.png" %}">
+        <img alt="{% trans "Unreal Estate logo" %}" src="{% static "images/unreal-estate-logo-small.png" %}">
     </a>
     <nav id="nav">
         <ul>
@@ -100,7 +101,7 @@
     <script src="{% static "js/skel-3.0.1.js" %}"></script>
     <script src="{% static "js/util.js" %}"></script>
     <!--[if lte IE 8]><script src="{% static "js/ie/respond-1.4.2.js" %}"></script><![endif]-->
-    <script src="{% static "js/main.js" %}"></script>
+    <script src="{% static "js/pixelarity.js" %}"></script>
 {% endcompress %}
 {% block extra_js %}{% endblock %}
 </body>

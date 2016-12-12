@@ -3,11 +3,10 @@
 {% load i18n thumbnail static compress %}
 
 {% block extra_js %}
-    {% compress js %}
-        <script src="{% static "js/jquery.scrollgress-1.0.0.js" %}"></script>
-    {% endcompress %}
-    <script src="{% static "js/jquery.scrolly-1.0.0-dev.min.js" %}"></script>
     <script src="{% static "js/jquery.slidertron-1.4.1-dev.min.js" %}"></script>
+    {% compress js %}
+        <script src="{% static "js/unrealestate-project.js" %}"></script>
+    {% endcompress %}
 {% endblock %}
 
 {% block content %}
