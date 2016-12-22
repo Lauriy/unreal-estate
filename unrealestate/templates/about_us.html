@@ -1,82 +1,88 @@
 {% extends "base.html" %}
 
-{% block content %}
-    <!-- Header -->
-    <header>
-        <h1>About Us</h1>
-    </header>
+{% load i18n static %}
 
-    <!-- Content -->
+{% block content %}
+    <header>
+        <h1>{% trans "About Us" %}</h1>
+    </header>
     <section id="content" class="wrapper">
-        <span class="image main"><img src="images/foto1.jpg" alt=""/></span>
-        <h2>Expanding on real estate investments</h2>
-        <p align="justify">Aftermarket real-estate may offer great investment
-            opportunity, but comes with hassles for buyers and
-            sellers. Real estate is an emotional, engaging and
-            tangible asset class, but it is presented and sold in
-            uninspiring ways. How might real estate investors
-            get a better chance to connect with the investments
-            they make, and know what they are putting their
-            money into without much manual due diligence?
+        <span class="image main"><img src="{% static "images/unrealestate-cityscape.jpg" %}"
+                                      title="{% trans "Illustrative cityscape" %}"
+                                      alt="{% trans "Illustrative cityscape" %}"/></span>
+        <h2>{% trans "Expanding on real estate investments" %}</h2>
+        <p align="justify">
+            {% blocktrans %}
+                Aftermarket real-estate may offer great investment
+                opportunity, but comes with hassles for buyers and
+                sellers. Real estate is an emotional, engaging and
+                tangible asset class, but it is presented and sold in
+                uninspiring ways. How might real estate investors
+                get a better chance to connect with the investments
+                they make, and know what they are putting their
+                money into without much manual due diligence?
+            {% endblocktrans %}
         </p>
-        <p align="justify">Taking the experience economy to experiential
-            asset classes like real estate is a no brainer. It
-            is time we break down big financial decisions
-            into smaller, digestible chunks that allow us to
-            better diversify our assets and enjoy investing
-            by exploring the tangible side of where we put
-            our money. It is ironic how much we care about
-            experience in the small things we purchase everyday,
-            yet how willingly we accept a subpar
-            experience whenever large sums of money are
-            involved? Turning big financial decisions such
-            as investing in real estate into small and more
-            exciting chunks that come more naturally to us
-            is a tremendous and little-exploited opportunity.</p>
-        <p align="justify">Drawing inspiration from crowdfunding, virtual
-            reality technology and the inherent preference
-            in Asia for real estate investment, unrealestate
-            offers a delightful and intuitive avenue to grow
-            one's wealth by backing attractive aftermarket
-            real estate sales harnessing the power of group
-            buying. This empowers anyone to own a piece
-            of desirable real estate, be it a holiday home or
-            a high-end condomimium downtown and earn
-            rental income on it immediately. Also, investors
-            have the opportunity to take advantage of the
-            healthy returns on real estate commonly seen
-            in Asia. Virtual walkthroughs facilitate property
-            evaluation and build an emotional connection
-            between asset and the group of buyers. Crowd
-            based decision-making and an aftermarket for
-            ionvestors to sell their stakes to oher users help
-            make investments in property highly tradable,
-            with the additional intangible benefit of owning
-            a high-status, lifestyle asset class.
+        <p align="justify">
+            {% blocktrans %}
+                Taking the experience economy to experiential
+                asset classes like real estate is a no brainer. It
+                is time we break down big financial decisions
+                into smaller, digestible chunks that allow us to
+                better diversify our assets and enjoy investing
+                by exploring the tangible side of where we put
+                our money. It is ironic how much we care about
+                experience in the small things we purchase everyday,
+                yet how willingly we accept a subpar
+                experience whenever large sums of money are
+                involved? Turning big financial decisions such
+                as investing in real estate into small and more
+                exciting chunks that come more naturally to us
+                is a tremendous and little-exploited opportunity.
+            {% endblocktrans %}
+        </p>
+        <p align="justify">
+            {% blocktrans %}
+                Drawing inspiration from crowdfunding, virtual
+                reality technology and the inherent preference
+                in Asia for real estate investment, unrealestate
+                offers a delightful and intuitive avenue to grow
+                one's wealth by backing attractive aftermarket
+                real estate sales harnessing the power of group
+                buying. This empowers anyone to own a piece
+                of desirable real estate, be it a holiday home or
+                a high-end condomimium downtown and earn
+                rental income on it immediately. Also, investors
+                have the opportunity to take advantage of the
+                healthy returns on real estate commonly seen
+                in Asia. Virtual walkthroughs facilitate property
+                evaluation and build an emotional connection
+                between asset and the group of buyers. Crowd
+                based decision-making and an aftermarket for
+                ionvestors to sell their stakes to oher users help
+                make investments in property highly tradable,
+                with the additional intangible benefit of owning
+                a high-status, lifestyle asset class.
+            {% endblocktrans %}
         </p>
     </section>
-
-
-
-    <!-- Five -->
     <section id="five" class="wrapper special">
-        <h2>Our team</h2>
-
+        <h2>{% trans "Our team" %}</h2>
         <ul class="faces">
             <li>
-                <span class="image"><img src="images/pic05.jpg" alt=""/></span>
-                <h3>Karl Vaan</h3>
-                <p>Chief Executive Officer</p>
+                <span class="image"><img src="{% static "images/unrealestate-karl-vaan.jpg" %}" title="Karl Vään" alt="Karl Vään"/></span>
+                <h3>Karl Vään</h3>
+                <p>{% trans "Chief Executive Officer" %}</p>
             </li>
             <li>
                 <span class="image"><img src="images/pic06.jpg" alt=""/></span>
                 <h3>Taavi Pettai</h3>
-                <p>Chief Operating Officer</p>
+                <p>{% trans "Chief Operating Officer" %}</p>
             </li>
             <li>
                 <span class="image"><img src="images/pic07.jpg" alt=""/></span>
                 <h3>Timo Kaus</h3>
-                <p>Chief Sales Officer</p>
+                <p>{% trans "Chief Sales Officer" %}</p>
             </li>
         </ul>
     </section>

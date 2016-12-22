@@ -25,8 +25,7 @@ INSTALLED_APPS = [
     'unrealestate',
     'allauth',
     'allauth.account',
-    # TODO: Re-enable once we have an app registered
-    # 'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount',
     'compressor',
