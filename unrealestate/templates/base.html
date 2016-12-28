@@ -30,14 +30,14 @@
                 <a title="{% trans "Home page" %}" href="{% url "home" %}">{% trans "Home" %}</a>
             </li>
             <li>
-                <a title="{% trans "How it works" %}" href="#content">{% trans "How it works" %}</a>
+                <a title="{% trans "How it works" %}" href="{% url "home" %}#how-it-works-wrapper">{% trans "How it works" %}</a>
             </li>
             <li class="{% if request.resolver_match.url_name == "about_us" %}active{% endif %}">
                 <a title="{% trans "About us" %}" href="{% url "about_us" %}">{% trans "About Us" %}</a>
             </li>
             {% if user.is_authenticated %}
                 <li class="{% if request.resolver_match.url_name == "account_profile" %}active{% endif %}">
-                    <a title="{% trans "My profile" %}" href="{% url "account_profile" %}">{% trans "My profile" %}</a>
+                    <a title="{% trans "My account" %}" href="{% url "account_profile" %}">{% trans "My account" %}</a>
                 </li>
                 <li class="{% if request.resolver_match.url_name == "account_logout" %}active{% endif %}">
                     <a title="{% trans "Log out" %}" href="{% url "account_logout" %}">{% trans "Log out" %}</a>
@@ -82,13 +82,8 @@
     </ul>
     <ul class="joined-icons">
         <li>
-            <a href="#" title="{% trans "Unreal Estate on Facebook" %}" class="icon fa-facebook">
+            <a href="https://www.facebook.com/UnrealEstateLtd/" title="{% trans "Unreal Estate on Facebook" %}" class="icon fa-facebook">
                 <span class="label">{% trans "Facebook" %}</span>
-            </a>
-        </li>
-        <li>
-            <a href="#" title="{% trans "Unreal Estate on Twitter" %}" class="icon fa-twitter">
-                <span class="label">{% trans "Twitter" %}</span>
             </a>
         </li>
     </ul>

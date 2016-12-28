@@ -94,6 +94,8 @@ LANGUAGES = (
     ('en', gettext('English')),
 )
 
+CURRENCIES = ['SGD']
+
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -124,7 +126,7 @@ CKEDITOR_UPLOAD_PATH = 'uploads/ckeditor/'
 CKEDITOR_IMAGE_BACKEND = 'pillow'
 
 COMMENTS_APP = 'django_comments_xtd'
-COMMENTS_XTD_MAX_THREAD_LEVEL = 2
+COMMENTS_XTD_MAX_THREAD_LEVEL = 1
 COMMENTS_XTD_CONFIRM_EMAIL = True
 
 EMAIL_HOST = 'smtp.gmail.com'

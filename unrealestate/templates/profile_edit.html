@@ -1,0 +1,37 @@
+{% extends 'profile.html' %}
+
+{% load i18n %}
+
+{% block profile_sub_content %}
+    <h3>{% trans "Edit your profile" %}</h3>
+    <form method="post" action=".">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="row uniform">
+            <div class="6u 12u$(xsmall)">
+                {{ form.first_name.errors }}
+                {{ form.first_name.label_tag }}
+                {{ form.first_name }}
+            </div>
+            <div class="6u$ 12u$(xsmall)">
+                {{ form.last_name.errors }}
+                {{ form.last_name.label_tag }}
+                {{ form.last_name }}
+            </div>
+            <div class="12u$">
+                <div class="select-wrapper">
+                    {{ form.interest_in_site.errors }}
+                    {{ form.interest_in_site.label_tag }}
+                    {{ form.interest_in_site }}
+                </div>
+            </div>
+            <div class="12u$">
+                <ul class="actions align-right">
+                    <li>
+                        <input type="submit" title="{% trans "Update my profile" %}" value="{% trans "Update" %}"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+{% endblock %}

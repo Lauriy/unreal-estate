@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    <div class="12u$">
+        {% trans "Pretending to wait for bank transaction..." %} <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        (function ($) {
+            'use strict';
+            /*jslint nomen: true*/
+            /*jslint browser: true*/
+            var transactionsUrl = '{% url "account_transactions" %}';
+            $(document).ready(function () {
+                setTimeout(function () {
+                    window.location = transactionsUrl;
+                }, 3000);
+            });
+        }(jQuery));
+    </script>
+{% endblock %}

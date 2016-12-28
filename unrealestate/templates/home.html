@@ -33,6 +33,11 @@
                  src="{% static 'images/dashboard.png' %}">
         </ul>
     </section>
+    <section class="wrapper style1 alt">
+        <header>
+            <h2 align="center">{% trans "Get started with Your first investment" %}</h2>
+        </header>
+    </section>
     {% for project in sample_projects %}
         <section class="wrapper style1 spotlight alt">
             <div class="content">
@@ -42,7 +47,7 @@
                     <ul class="actions">
                         <li>
                             <a href="{% url 'project_detail_slug' project.id project.slug %}"
-                               title="{{ project.title }}" class="button">{% trans "Learn More" %}</a>
+                               title="{{ project.title }}" class="button">{% trans "Own a share" %}</a>
                         </li>
                     </ul>
                 </div>
@@ -100,56 +105,44 @@
         <ul class="faces">
             <li>
                 <span class="icon major fa-users style2"></span>
-
-                <h3>Crowdinvest</h3>
-                <p>With the power of group buying, we enable investors to enter the real estate market with small
-                    amounts and allocate funds to achieve the best direct investment risk-reward relationship.</p>
+                <h3>{% trans "Crowdinvest" %}</h3>
+                <p>
+                    {% blocktrans %}
+                        With the power of group buying, we enable investors to enter the real estate market with small
+                        amounts and allocate funds to achieve the best direct investment risk-reward relationship.
+                    {% endblocktrans %}
+                </p>
             </li>
             <li>
                 <span class="icon major fa-bar-chart style3"></span>
-
-                <h3>Full coverage</h3>
-                <p>We provide transparent and detailed information for each project with additional 3D/VR experience to
-                    make sure our investors are fully engaged.</p>
+                <h3>{% trans "Full coverage" %}</h3>
+                <p>
+                    {% blocktrans %}
+                        We provide transparent and detailed information for each project with additional 3D/VR
+                        experience to
+                        make sure our investors are fully engaged.
+                    {% endblocktrans %}
+                </p>
             </li>
             <li>
                 <span class="icon major fa-check-square-o style4"></span>
-
-                <h3>Simple</h3>
-                <p>With userfriendly platform and unbureaucratic approach we offer hassle free real estate investments
-                    to enable you to achieve your personal goals and test differnet strategies.</p>
+                <h3>{% trans "Simple" %}</h3>
+                <p>
+                    {% blocktrans %}
+                        With userfriendly platform and unbureaucratic approach we offer hassle free real estate
+                        investments
+                        to enable you to achieve your personal goals and test differnet strategies.
+                    {% endblocktrans %}
+                </p>
             </li>
         </ul>
     </section>
-
-    <!-- Content -->
-    <section id="content" class="wrapper style4">
-        <span class="image main"><img src="images/howitworks2.png" alt=""/></span>
-        <div class="image2"><img src="images/reidike.png" alt=""/></div>
-
-    </section>
-
-
-    <!-- One -->
-
-    <section id="one" class="wrapper spotlight">
-        <div class="content">
-            <div class="inner">
-                <h2>Stock market vs real estate</h2>
-                <p align="justify">Graph on the right compares the Asia Pacific REIT index and the Asia Pacific stock
-                    market index. FTSE EPRA/NAREIT Asia Pacific index is designed to track the performance of listed
-                    real estate companies and REITS in both developed and emerging markets. FTSE Asia Pacific index
-                    represents Asia Pacific stock market. The latter helps Asia Pacific investors to benchmark their
-                    investments. It is clearly visible that investing in real estate has turned out to be more
-                    profitable than the stock market.</p>
-                <ul class="actions">
-                    <li><a href="generic.html" class="button">Learn More</a></li>
-                </ul>
-            </div>
-        </div>
-        <ul class="grid-icons">
-
-        </ul>
+    <section id="how-it-works-wrapper" class="wrapper">
+        <span class="image main"><img src="{% static "images/unreal-estate-how-it-works.png" %}"
+                                      alt="{% trans "How it works" %}" title="{% trans "How it works" %}"/></span>
+        <div id="how-it-works-illustrative-house-container"><img
+                src="{% static "images/unreal-estate-how-it-works-illustration.png" %}"
+                alt="{% trans "Illustrative house" %}" title="{% trans "How it works" %}"/></div>
     </section>
 {% endblock %}
 

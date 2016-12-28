@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load i18n thumbnail static compress %}
+{% load i18n thumbnail static compress comments %}
 
 {% block extra_js %}
     <script src="{% static "js/jquery.slidertron-1.4.1-dev.min.js" %}"></script>
@@ -13,7 +13,7 @@
     <header>
         <h1>{{ object.title }}</h1>
     </header>
-    <section id="one" class="wrapper style1">
+    <section class="wrapper unreal-estate-project-detail-section">
         <div class="container">
             <header class="major"><h2>{% trans "General information" %}</h2>
                 <p align="justify">
@@ -26,7 +26,7 @@
                 </p>
             </header>
             {% if object.video %}
-                <div class="video">
+                <div id="unreal-estate-project-detail-video" class="video">
                     <video title="{{ object.title }}" src="{{ object.video.url }}" controls></video>
                 </div>
             {% endif %}
@@ -48,11 +48,11 @@
             </div>
         </div>
     </section>
-    <section id="five" class="wrapper style2">
+    <section class="wrapper unreal-estate-project-detail-circles-container">
         <ul class="faces">
             <li>
                 <span class="image">
-                    <img class="unrealestate-project-circle" src="{% static "images/pic05.jpg" %}"
+                    <img class="unreal-estate-project-circle" src="{% static "images/pic05.jpg" %}"
                          alt="{% trans "Goal" %}"/>
                 </span>
                 <h3>{% trans "Goal" %}</h3>
@@ -60,7 +60,7 @@
             </li>
             <li>
                 <span class="image">
-                    <img class="unrealestate-project-circle" src="{% static "images/pic07.jpg" %}"
+                    <img class="unreal-estate-project-circle" src="{% static "images/pic07.jpg" %}"
                          alt="{% trans "Deadline" %}"/>
                 </span>
                 <h3>{% trans "Deadline" %}</h3>
@@ -68,37 +68,63 @@
             </li>
             <li>
                 <span class="image">
-                    <img class="unrealestate-project-circle" src="{% static "images/pic07.jpg" %}"
+                    <img class="unreal-estate-project-circle" src="{% static "images/pic07.jpg" %}"
                          alt="{% trans "Asset class" %}"/>
                 </span>
                 <h3>{% trans "Asset class" %}</h3>
                 <p>{{ object.asset_class }}</p>
         </ul>
     </section>
-    <section id="five" class="wrapper style2">
+    <section class="wrapper unreal-estate-project-detail-circles-container">
         <ul class="faces">
             <li>
                 <span class="image">
-                    <img class="unrealestate-project-circle" src="{% static "images/pic05.jpg" %}"
+                    <img class="unreal-estate-project-circle" src="{% static "images/pic05.jpg" %}"
                          alt="{% trans "Investment type" %}"/>
                 </span>
                 <h3>{% trans "Investment type" %}</h3>
                 <p>{{ object.investment_type }}</p>
             </li>
             <li>
-                <span class="image"><img class="unrealestate-project-circle" src="{% static "images/pic06.jpg" %}" alt="{% trans "Investment period" %}"/></span>
+                <span class="image"><img class="unreal-estate-project-circle" src="{% static "images/pic06.jpg" %}"
+                                         alt="{% trans "Investment period" %}"/></span>
                 <h3>{% trans "Investment period" %}</h3>
-                <p>{% blocktrans with months=object.investment_period_months  %}{{ months }} months{% endblocktrans %}</p>
+                <p>{% blocktrans with months=object.investment_period_months %}{{ months }}months{% endblocktrans %}</p>
             </li>
             <li>
                 <span class="image">
-                    <img class="unrealestate-project-circle" src="{% static "images/pic07.jpg" %}" alt="{% trans "Expected rate of return" %}"/>
+                    <img class="unreal-estate-project-circle" src="{% static "images/pic07.jpg" %}"
+                         alt="{% trans "Expected rate of return" %}"/>
                 </span>
                 <h3>{% trans "Expected rate of return" %}</h3>
                 <p>{{ object.expected_rate_of_return }}%</p>
+            </li>
         </ul>
     </section>
-    <section id="three" class="wrapper style1">
+    <section class="wrapper unreal-estate-project-detail-section">
+        <div class="container">
+            <header class="major">
+                <h2>{% trans "Ask a question" %}</h2>
+            </header>
+            <div class="row">
+                <div id="comments">
+                    {% get_comment_count for object as comment_count %}
+                    {% if comment_count %}
+                        <H4 class="center">{{ comment_count }} comment{{ comment_count|pluralize }}</H4>
+                    {% endif %}
+                    <div id="comment-list">
+                        {% render_comment_list for object %}
+                    </div>
+
+                    <H4 class="center">your comment</H4>
+                    <div id="comment-form">
+                        {% render_comment_form for object %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="three" class="wrapper unreal-estate-project-detail-section">
         <div class="container">
             <header class="major"><h2>{% trans "Information tabs" %}</h2>
                 <p>
@@ -109,68 +135,94 @@
             </header>
             <div class="row">
                 <div class="4u 6u(medium) 12u$(small)">
-                    <article class="box post"><a href="#" class="image fit"><img src="{% static "images/sinine.jpg" %}" alt="{% trans "General" %}"/></a>
+                    <article class="box post">
+                        <a href="#" class="image fit">
+                            <img src="{% static "images/unreal-estate-blue.jpg" %}"
+                                 title="{% trans "General information" %}" alt="{% trans "General information" %}"/>
+                        </a>
                         <h3>{% trans "General" %}</h3>
-                        <p>Name - Nordic House, Address - Kastellet, 18599, Sweden, Size - 500m2</p>
-
+                        <p>{{ object.analysis_general_intro }}...</p>
                         <ul class="actions">
-                            <li><a href="#" class="button">Learn More</a></li>
+                            <li>
+                                <a href="#" class="button">{% trans "Learn more" %}</a>
+                            </li>
                         </ul>
                     </article>
                 </div>
                 <div class="4u 6u$(medium) 12u$(small)">
-                    <article class="box post"><a href="#" class="image fit"><img src="images/bees.jpg" alt=""/></a>
-                        <h3>Location</h3>
-                        <p>About 20km from Stockholm city center, this beautiful vacation home has ...</p>
+                    <article class="box post">
+                        <a href="#" class="image fit">
+                            <img src="{% static "images/unreal-estate-beige.jpg" %}"
+                                 title="{% trans "Location" %}" alt="{% trans "Location" %}"/>
+                        </a>
+                        <h3>{% trans "Location" %}</h3>
+                        <p>{{ object.analysis_location_intro }}...</p>
                         <ul class="actions">
-                            <li><a href="#" class="button">Learn More</a></li>
+                            <li>
+                                <a href="#" class="button">{% trans "Learn More" %}</a>
+                            </li>
                         </ul>
                     </article>
                 </div>
                 <div class="4u$ 6u(medium) 12u$(small)">
-                    <article class="box post"><a href="#" class="image fit"><img src="images/tumesinine.jpg"
-                                                                                 alt=""/></a>
-                        <h3>Market</h3>
-                        <p>The demand for new developments continues to be strong. This, however, can...</p>
+                    <article class="box post">
+                        <a href="#" class="image fit">
+                            <img src="{% static "images/unreal-estate-dark-blue.jpg" %}"
+                                 title="{% trans "Market" %}" alt="{% trans "Market" %}"/>
+                        </a>
+                        <h3>{% trans "Market" %}</h3>
+                        <p>{{ object.analysis_market_intro }}...</p>
                         <ul class="actions">
-                            <li><a href="#" class="button">Learn More</a></li>
+                            <li>
+                                <a href="#" class="button">{% trans "Learn More" %}</a>
+                            </li>
                         </ul>
                     </article>
                 </div>
                 <div class="4u 6u$(medium) 12u$(small)">
-                    <article class="box post"><a href="#" class="image fit"><img src="images/bees.jpg" alt=""/></a>
-                        <h3>Project Analysis</h3>
-                        <p>In this section you can find the SWOT analysis of this project. Both internal and external
-                            factors have been taken into account to thoroughly assess different attributes of...</p>
+                    <article class="box post">
+                        <a href="#" class="image fit">
+                            <img src="{% static "images/unreal-estate-beige.jpg" %}"
+                                 title="{% trans "Project" %}" alt="{% trans "Project" %}"/>
+                        </a>
+                        <h3>{% trans "Project Analysis" %}</h3>
+                        <p>{{ object.analysis_project_intro }}...</p>
                         <ul class="actions">
-                            <li><a href="#" class="button">Learn More</a></li>
+                            <li><a href="#" class="button">{% trans "Learn More" %}</a></li>
                         </ul>
                     </article>
                 </div>
                 <div class="4u 6u(medium) 12u$(small)">
-                    <article class="box post"><a href="#" class="image fit"><img src="images/tumesinine.jpg"
-                                                                                 alt=""/></a>
-                        <h3>Financials</h3>
-                        <p>The project investment returns are estimated and are subject to influences of the overall
-                            economic situation and supply/demand relationship. Detailed ...</p>
+                    <article class="box post">
+                        <a href="#" class="image fit">
+                            <img src="{% static "images/unreal-estate-dark-blue.jpg" %}"
+                                 title="{% trans "Financials" %}" alt="{% trans "Financials" %}"/>
+                        </a>
+                        <h3>{% trans "Financials" %}</h3>
+                        <p>{{ object.analysis_financial_intro }}...</p>
                         <ul class="actions">
-                            <li><a href="#" class="button">Learn More</a></li>
+                            <li>
+                                <a href="#" class="button">{% trans "Learn More" %}</a>
+                            </li>
                         </ul>
                     </article>
                 </div>
                 <div class="4u$ 6u$(medium) 12u$(small)">
-                    <article class="box post"><a href="#" class="image fit"><img src="images/sinine.jpg" alt=""/></a>
-                        <h3>Related Documents</h3>
-                        <p>Below you can find supporting documents of the project providing additional information not
-                            stated elsewhere. In order to gain more trust in investors, other legal and ...</p>
+                    <article class="box post">
+                        <a href="#" class="image fit">
+                            <img src="{% static "images/unreal-estate-blue.jpg" %}"
+                                 title="{% trans "Related Documents" %}" alt="{% trans "Related Documents" %}"/>
+                        </a>
+                        <h3>{% trans "Related Documents" %}</h3>
+                        <p>{{ object.analysis_documents_intro }}...</p>
                         <ul class="actions">
-                            <li><a href="#" class="button">Learn More</a></li>
+                            <li><a href="#" class="button">{% trans "Learn More" %}</a></li>
                         </ul>
                     </article>
                 </div>
             </div>
         </div>
-    </section><!-- CTA -->
+    </section>
     <section id="cta" class="wrapper style3">
         <ul class="actions">
             <li><a href="signup.html" class="button big">Invest</a>

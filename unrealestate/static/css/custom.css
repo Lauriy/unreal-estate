@@ -4,9 +4,64 @@
 }
 
 /* Project detail page */
-.unrealestate-project-circle {
+.unreal-estate-project-circle {
     width: 30px;
     border-radius: 100%;
+}
+
+#unreal-estate-project-detail-video {
+    width: 80%;
+    position: relative;
+    margin: auto;
+    margin-bottom: 3em;
+}
+
+.unreal-estate-project-detail-circles-container {
+    background-color: #ffffff;
+    color: #6e6e6e;
+    padding: 0;
+    text-align: center;
+}
+
+.unreal-estate-project-detail-circles-container ul.faces li {
+    border-color: #ffffff;
+}
+
+.unreal-estate-project-detail-section {
+    background-color: #fafafa;
+    color: #6e6e6e;
+}
+
+#unreal-estate-project-detail-video > video {
+    width: 100%;
+    border-radius: 0.5em;
+    border: solid 1.5em #fff;
+}
+
+/* Homepage */
+#how-it-works-wrapper {
+    background: -webkit-radial-gradient(circle, #3a7d9a, #2b2463);
+    color: #ffffff;
+    padding: 0;
+}
+
+#how-it-works-illustrative-house-container {
+    display: block;
+    position: relative;
+    width: 75%;
+}
+
+#how-it-works-illustrative-house-container > img {
+    display: block;
+    position: relative;
+    margin: auto;
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+    width: 100%;
 }
 
 /* Slider */

@@ -1,0 +1,43 @@
+{% extends 'profile.html' %}
+
+{% load i18n %}
+
+{% block profile_sub_content %}
+    <h3>{% trans "Your transactions" %}</h3>
+    <div class="table-wrapper">
+        <table class="alt">
+            <thead>
+            <tr>
+                <th>{% trans "Amount" %}</th>
+                <th>{% trans "Time" %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for transaction in object_list %}
+                <tr>
+                    <td>{% if transaction.type == 0 %}+{% else %}-{% endif %} {{ transaction.amount }}</td>
+                    <td>{{ transaction.created }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="2">{{ account_balance }}</td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="pagination">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+                <a href="{% url "account_transactions" %}?page={{ page_obj.previous_page_number }}">{% trans "previous" %}</a>
+            {% endif %}
+            <span class="page-current">
+                {% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+                <a href="{% url "account_transactions" %}?page={{ page_obj.next_page_number }}">{% trans "next" %}</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}

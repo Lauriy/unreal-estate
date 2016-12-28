@@ -1,0 +1,25 @@
+{% extends 'profile.html' %}
+
+{% load i18n %}
+
+{% block profile_sub_content %}
+    <h3>{% trans "Withdraw your earnings" %}</h3>
+    <form method="post" action=".">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="row uniform">
+            <div class="6u 12u$(xsmall)">
+                {{ form.amount.errors }}
+                {{ form.amount.label_tag }}
+                {{ form.amount }}
+            </div>
+            <div class="12u$">
+                <ul class="actions align-right">
+                    <li>
+                        <input type="submit" title="{% trans "Withdraw" %}" value="{% trans "Withdraw" %}"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+{% endblock %}
