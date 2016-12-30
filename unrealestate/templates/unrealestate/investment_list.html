@@ -1,1 +1,42 @@
-<!-- TODO: Investment listing -->
+{% extends 'profile.html' %}
+
+{% load i18n %}
+
+{% block profile_sub_content %}
+    <h3>{% trans "Your investments" %}</h3>
+    <div class="table-wrapper">
+        <table class="alt">
+            <thead>
+            <tr>
+                <th>{% trans "Token" %}</th>
+                <th>{% trans "Project" %}</th>
+                <th>{% trans "Value" %}</th>
+                <th>{% trans "Obtained" %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for investment in object_list %}
+                <tr>
+                    <td>{{ investment.token }}</td>
+                    <td>{{ investment.project }}</td>
+                    <td>{{ investment.value }}</td>
+                    <td>{{ investment.created }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="pagination">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+                <a href="{% url "account_transactions" %}?page={{ page_obj.previous_page_number }}">{% trans "previous" %}</a>
+            {% endif %}
+            <span class="page-current">
+                {% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+                <a href="{% url "account_transactions" %}?page={{ page_obj.next_page_number }}">{% trans "next" %}</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}

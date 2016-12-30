@@ -1,7 +1,9 @@
+from uuid import uuid4
+
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import AbstractUser
 from django.db.models import Model, CharField, TextField, FileField, ImageField, BooleanField, ForeignKey, \
-    DateTimeField, IntegerField, DecimalField, SlugField, PositiveSmallIntegerField
+    DateTimeField, IntegerField, DecimalField, SlugField, PositiveSmallIntegerField, UUIDField
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from djmoney.models.fields import MoneyField
@@ -47,6 +49,7 @@ class Project(Model):
     video = FileField(upload_to='uploads/videos/', null=True, blank=True)
     is_allowed_on_home_page = BooleanField(default=False)
     goal = MoneyField(max_digits=12, decimal_places=2, default_currency='SGD')
+    minimal_investment_amount = MoneyField(max_digits=12, decimal_places=2, default_currency='SGD')
     deadline = DateTimeField()
     asset_class = ForeignKey('AssetClass', related_name='projects')
     investment_type = ForeignKey('InvestmentType', related_name='projects')
@@ -73,6 +76,13 @@ class Project(Model):
     def get_absolute_url(self):
         return reverse('project_detail_slug', args=[str(self.id), self.slug])
 
+    def get_currently_invested_total_sum(self):
+        sum = 0
+        for each in self.investments.all():
+            sum += each.value
+
+        return sum
+
 
 class ProjectImage(Model):
     project = ForeignKey('Project', related_name='images')
@@ -94,10 +104,11 @@ class UserInterestInSite(Model):
 
 
 class Transaction(Model):
-    DEPOSIT, WITHDRAWAL = range(2)
+    DEPOSIT, WITHDRAWAL, INVESTMENT = range(3)
     TRANSACTION_TYPE_CHOICES = (
         (DEPOSIT, _('Deposit')),
         (WITHDRAWAL, _('Withdrawal')),
+        (INVESTMENT, _('Investment')),
     )
     user = ForeignKey('User', related_name='transactions')
     type = PositiveSmallIntegerField(choices=TRANSACTION_TYPE_CHOICES)
@@ -105,6 +116,17 @@ class Transaction(Model):
     created = DateTimeField(auto_now_add=True)
     modified = DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return ' - '.join([self.user.username, self.get_type_display(), str(self.amount)])
+
 
 class Investment(Model):
-    pass
+    token = UUIDField(default=uuid4, editable=False)
+    project = ForeignKey('Project', related_name='investments')
+    user = ForeignKey('User', related_name='investments')
+    value = MoneyField(max_digits=12, decimal_places=2, default_currency='SGD')
+    created = DateTimeField(auto_now_add=True)
+    modified = DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return ' - '.join([str(self.token), self.project.title, self.user.username])

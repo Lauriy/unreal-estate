@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from unrealestate.models import AssetClass, InvestmentType, Project, ProjectImage, UserInterestInSite, User
+from unrealestate.models import AssetClass, InvestmentType, Project, ProjectImage, UserInterestInSite, User, Investment, \
+    Transaction
 
 
 class ProjectAdmin(admin.ModelAdmin):
@@ -14,3 +15,5 @@ admin.site.register(AssetClass)
 admin.site.register(InvestmentType)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(ProjectImage)
+admin.site.register(Investment)
+admin.site.register(Transaction)

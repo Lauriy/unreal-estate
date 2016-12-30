@@ -12,3 +12,5 @@ django-markup==1.1
 uWSGI==2.0.14
 Pillow==3.4.2
 django-debug-toolbar==1.6
+django-haystack==2.5.1
+Whoosh==2.7.4

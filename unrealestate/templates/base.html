@@ -29,8 +29,14 @@
             <li class="{% if request.resolver_match.url_name == "home" %}active{% endif %}">
                 <a title="{% trans "Home page" %}" href="{% url "home" %}">{% trans "Home" %}</a>
             </li>
+            <li class="{% if request.resolver_match.url_name == "offerings" %}active{% endif %}">
+                <a title="{% trans "Offerings" %}" href="{% url "offerings" %}">{% trans "Offerings" %}</a>
+            </li>
             <li>
                 <a title="{% trans "How it works" %}" href="{% url "home" %}#how-it-works-wrapper">{% trans "How it works" %}</a>
+            </li>
+            <li class="{% if request.resolver_match.url_name == "faq" %}active{% endif %}">
+                <a title="{% trans "Frequently asked questions" %}" href="{% url "faq" %}">{% trans "FAQ" %}</a>
             </li>
             <li class="{% if request.resolver_match.url_name == "about_us" %}active{% endif %}">
                 <a title="{% trans "About us" %}" href="{% url "about_us" %}">{% trans "About Us" %}</a>
@@ -77,7 +83,7 @@
             <h3 class="icon fa-envelope major">
                 <span class="label">{% trans "Email" %}</span>
             </h3>
-            <p><a title="{% trans "Email us" %}" href="mailto:info@unrealestate.ee">info@unrealestate.ee</a></p>
+            <p><a title="{% trans "Email us" %}" href="mailto:team@unrealestate.sg">team@unrealestate.sg</a></p>
         </li>
     </ul>
     <ul class="joined-icons">

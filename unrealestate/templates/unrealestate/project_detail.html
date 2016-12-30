@@ -225,8 +225,26 @@
     </section>
     <section id="cta" class="wrapper style3">
         <ul class="actions">
-            <li><a href="signup.html" class="button big">Invest</a>
+            <li>
+                <form method="post" action=".">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    <div class="row uniform">
+                        <div class="6u 12u$(xsmall)">
+                            {{ form.amount.errors }}
+                            {{ form.amount.label_tag }}
+                            {{ form.amount }}
+                        </div>
+                        <div class="6u 12u$(xsmall)">
+                            <ul class="actions align-right">
+                                <li>
+                                    <input type="submit" title="{% trans "Invest" %}" value="{% trans "Invest" %}"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </li>
         </ul>
     </section>
-
 {% endblock %}

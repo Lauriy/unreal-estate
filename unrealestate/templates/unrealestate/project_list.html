@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% load i18n thumbnail static %}
+
+{% block content %}
+    <header>
+        <h1>{% trans "Current investment opportunities" %}</h1>
+    </header>
+    <section class="wrapper">
+        <form method="get" action=".">
+            {{ form.non_field_errors }}
+            <div class="row uniform">
+                <div class="6u 12u$(xsmall)">
+                    {{ form.q.errors }}
+                    {{ form.q.label_tag }}
+                    {{ form.q }}
+                </div>
+                <div class="6u 12u$(xsmall)">
+                    <ul class="actions align-right">
+                        <li>
+                            <input type="submit" title="{% trans "Search" %}" value="{% trans "Search" %}"/>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </section>
+    <section class="wrapper">
+        {% for offering in object_list %}
+            <div class="4u 12u$(xsmall)">
+                <div class="table-wrapper">
+                    <table>
+                        <tbody class="align-center">
+                        <tr>
+                            <td colspan="2">
+                                <div class="image">
+                                    {% thumbnail offering.images.first "x200" crop="center" as im %}
+                                        <a href="{% url "project_detail_slug" offering.pk offering.slug %}"
+                                           title="{{ offering.title }}">
+                                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"
+                                                 alt="{{ offering.title }}" title="{{ offering.title }}">
+                                        </a>
+                                    {% endthumbnail %}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><a href="{% url "project_detail_slug" offering.pk offering.slug %}"
+                                               title="{{ offering.title }}">{{ offering.title }}</a></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <progress
+                                        title="{{ offering.get_currently_invested_total_sum.amount }} / {{ offering.goal.amount }}"
+                                        value="{{ offering.get_currently_invested_total_sum.amount }}"
+                                        max="{{ offering.goal.amount }}"></progress>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="align-left">{% trans "Target raise" %}</td>
+                            <td class="align-right">{{ offering.goal }}</td>
+                        </tr>
+                        <tr>
+                            <td class="align-left">{% trans "Time left" %}</td>
+                            <td class="align-right">{{ offering.deadline|timeuntil }}</td>
+                        </tr>
+                        <tr>
+                            <td class="align-left">{% trans "Ann. return" %}</td>
+                            <td class="align-right">{{ offering.expected_rate_of_return }}%</td>
+                        </tr>
+                        <tr>
+                            <td class="align-left">{% trans "Type of property" %}</td>
+                            <td class="align-right">{{ offering.investment_type }}</td>
+                        </tr>
+                        <tr>
+                            <td class="align-left">{% trans "Min. investment amt." %}</td>
+                            <td class="align-right">{{ offering.minimal_investment_amount }}</td>
+                        </tr>
+                        <tr>
+                            <td class="align-left">{% trans "Hold term" %}</td>
+                            <td class="align-right">{{ offering.investment_period_months }} {% trans "months" %}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+{% endblock %}

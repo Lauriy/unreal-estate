@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    <header>
+        <h1>{% trans "Frequently asked questions" %}</h1>
+    </header>
+    <section id="content" class="wrapper">
+        <p>
+            {% trans "We have none yet." %}
+        </p>
+    </section>
+    <section class="wrapper special">
+        <h2>{% trans "Ask and be answered" %}</h2>
+        <form method="post" action=".">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="row uniform">
+                {% if not user.is_authenticated %}
+                    <div class="6u 12u$(xsmall)">
+                        {{ form.contact_name.errors }}
+                        {{ form.contact_name.label_tag }}
+                        {{ form.contact_name }}
+                    </div>
+                    <div class="6u 12u$(xsmall)">
+                        {{ form.contact_email.errors }}
+                        {{ form.contact_email.label_tag }}
+                        {{ form.contact_email }}
+                    </div>
+                {% endif %}
+                <div class="12u">
+                    {{ form.question.errors }}
+                    {{ form.question.label_tag }}
+                    {{ form.question }}
+                </div>
+                <div class="12u$">
+                    <ul class="actions align-right">
+                        <li>
+                            <input type="submit" title="{% trans "Ask" %}" value="{% trans "Ask" %}"/>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+    </section>
+{% endblock %}

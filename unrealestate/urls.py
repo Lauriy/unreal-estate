@@ -4,8 +4,9 @@ from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
-from unrealestate.views import HomeView, AboutUsView, SignUpView, ProfileEditView, ProjectDetailView, \
-    ProfileAddFundsView, ProfileWithdrawFundsView, ProfileTransactionsView, ProfileInvestmentsView, FakeBankView
+from unrealestate.views import HomeView, AboutUsView, FAQView, SignUpView, ProfileEditView, ProjectDetailView, \
+    ProfileAddFundsView, ProfileWithdrawFundsView, ProfileTransactionsView, ProfileInvestmentsView, FakeBankView, \
+    OfferingsView
 
 urlpatterns = [
     url(r'^$', HomeView.as_view(), name='home'),
@@ -28,10 +29,12 @@ if settings.DEBUG:
 
 urlpatterns += i18n_patterns(
     url(r'^$', HomeView.as_view(), name='home'),
+    url(_(r'^offerings/$'), OfferingsView.as_view(), name='offerings'),
     url(_(r'^about-us/$'), AboutUsView.as_view(), name='about_us'),
+    url(_(r'^faq/$'), FAQView.as_view(), name='faq'),
     url(_(r'^sign-up/$'), SignUpView.as_view(), name='sign_up'),
-    url(_(r'^projects/(?P<id>\d+)/$'), ProjectDetailView.as_view(), name='project_detail_id'),
-    url(_(r'^projects/(?P<id>\d+)/(?P<slug>[-\w]+)/$'), ProjectDetailView.as_view(), name='project_detail_slug'),
+    url(_(r'^project/(?P<id>\d+)/$'), ProjectDetailView.as_view(), name='project_detail_id'),
+    url(_(r'^project/(?P<id>\d+)/(?P<slug>[-\w]+)/$'), ProjectDetailView.as_view(), name='project_detail_slug'),
     url(_(r'^accounts/add-funds/$'), ProfileAddFundsView.as_view(), name='account_add_funds'),
     url(_(r'^accounts/transactions/$'), ProfileTransactionsView.as_view(), name='account_transactions'),
     url(_(r'^accounts/transactions/fake-bank/$'), FakeBankView.as_view(), name='account_fake_bank'),
