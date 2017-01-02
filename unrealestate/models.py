@@ -42,6 +42,36 @@ class InvestmentType(Model):
         return self.name
 
 
+class Country(Model):
+    name = CharField(max_length=255)
+    iso_alpha_2 = CharField(max_length=2)
+    created = DateTimeField(auto_now_add=True)
+    modified = DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+
+class City(Model):
+    name = CharField(max_length=255)
+    country = ForeignKey('Country', related_name='cities')
+    created = DateTimeField(auto_now_add=True)
+    modified = DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+
+class District(Model):
+    name = CharField(max_length=255)
+    city = ForeignKey('City', related_name='districts')
+    created = DateTimeField(auto_now_add=True)
+    modified = DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Project(Model):
     title = CharField(max_length=255)
     slug = SlugField()
@@ -67,6 +97,9 @@ class Project(Model):
     analysis_financial = RichTextUploadingField(null=True, blank=True)
     analysis_documents_intro = CharField(max_length=255, null=True, blank=True)
     analysis_documents = RichTextUploadingField(null=True, blank=True)
+    country = ForeignKey('Country', related_name='projects', null=True, blank=True)
+    city = ForeignKey('City', related_name='projects', null=True, blank=True)
+    district = ForeignKey('District', related_name='districts', null=True, blank=True)
     created = DateTimeField(auto_now_add=True)
     modified = DateTimeField(auto_now=True)
 
@@ -75,13 +108,6 @@ class Project(Model):
 
     def get_absolute_url(self):
         return reverse('project_detail_slug', args=[str(self.id), self.slug])
-
-    def get_currently_invested_total_sum(self):
-        sum = 0
-        for each in self.investments.all():
-            sum += each.value
-
-        return sum
 
 
 class ProjectImage(Model):

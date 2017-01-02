@@ -1,89 +1,142 @@
 {% extends "base.html" %}
 
-{% load i18n thumbnail static %}
+{% load i18n thumbnail static utility %}
 
 {% block content %}
     <header>
         <h1>{% trans "Current investment opportunities" %}</h1>
     </header>
-    <section class="wrapper">
-        <form method="get" action=".">
-            {{ form.non_field_errors }}
+    <section id="content" class="wrapper">
+        <section>
+            <form method="get" action=".">
+                <div class="row uniform">
+                    {{ form.non_field_errors }}
+                    <div class="6u 12u$(xsmall)">
+                        {{ form.q.errors }}
+                        {{ form.q.label_tag }}
+                        {{ form.q }}
+                    </div>
+                    <div class="6u$ 12u$(xsmall)">
+                        {{ form.type.errors }}
+                        {{ form.type.label_tag }}
+                        <div class="select-wrapper">
+                            {{ form.type }}
+                        </div>
+                    </div>
+                    <div class="4u 12u$(xsmall)">
+                        {{ form.country.errors }}
+                        {{ form.country.label_tag }}
+                        <div class="select-wrapper">
+                            {{ form.country }}
+                        </div>
+                    </div>
+                    <div class="4u 12u$(xsmall)">
+                        {{ form.city.errors }}
+                        {{ form.city.label_tag }}
+                        <div class="select-wrapper">
+                            {{ form.city }}
+                        </div>
+                    </div>
+                    <div class="4u$ 12u$(xsmall)">
+                        {{ form.district.errors }}
+                        {{ form.district.label_tag }}
+                        <div class="select-wrapper">
+                            {{ form.district }}
+                        </div>
+                    </div>
+                    <div class="3u 12u$(xsmall)">
+                        {{ form.date_added_from.errors }}
+                        {{ form.date_added_from.label_tag }}
+                        {{ form.date_added_from }}
+                    </div>
+                    <div class="3u 12u$(xsmall)">
+                        {{ form.date_added_until.errors }}
+                        {{ form.date_added_until.label_tag }}
+                        {{ form.date_added_until }}
+                    </div>
+                    <div class="3u 12u$(xsmall)">
+                        {{ form.goal_from.errors }}
+                        {{ form.goal_from.label_tag }}
+                        {{ form.goal_from }}
+                    </div>
+                    <div class="3u$ 12u$(xsmall)">
+                        {{ form.goal_up_to.errors }}
+                        {{ form.goal_up_to.label_tag }}
+                        {{ form.goal_up_to }}
+                    </div>
+                    <div class="12u$">
+                        <ul class="actions align-right">
+                            <li>
+                                <input type="submit" title="{% trans "Filter" %}" value="{% trans "Filter" %}"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+        </section>
+        <section>
             <div class="row uniform">
-                <div class="6u 12u$(xsmall)">
-                    {{ form.q.errors }}
-                    {{ form.q.label_tag }}
-                    {{ form.q }}
-                </div>
-                <div class="6u 12u$(xsmall)">
-                    <ul class="actions align-right">
-                        <li>
-                            <input type="submit" title="{% trans "Search" %}" value="{% trans "Search" %}"/>
-                        </li>
-                    </ul>
-                </div>
+                {% for offering in object_list %}
+                    <div class="4u 12u$(xsmall)">
+                        <div class="table-wrapper">
+                            <table>
+                                <tbody class="align-center">
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="image">
+                                            {% thumbnail offering.images.first "300x200" crop="center" as im %}
+                                                <a href="{% url "project_detail_slug" offering.pk offering.slug %}"
+                                                   title="{{ offering.title }}">
+                                                    <img src="{{ im.url }}" width="{{ im.width }}"
+                                                         height="{{ im.height }}"
+                                                         alt="{{ offering.title }}" title="{{ offering.title }}">
+                                                </a>
+                                            {% endthumbnail %}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><a href="{% url "project_detail_slug" offering.pk offering.slug %}"
+                                                       title="{{ offering.title }}">{{ offering.title }}</a></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <progress
+                                                title="{{ offering.invested_sum }} / {{ offering.goal.amount }} ({{ offering.investors }} {% trans "investor(s)" %})"
+                                                value="{{ offering.invested_sum }}"
+                                                max="{{ offering.goal.amount }}"></progress>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="align-left">{% trans "Target raise" %}</td>
+                                    <td class="align-right">{{ offering.goal }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="align-left">{% trans "Time left" %}</td>
+                                    <td class="align-right">{{ offering.deadline|timeuntil|upto:',' }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="align-left">{% trans "Ann. return" %}</td>
+                                    <td class="align-right">{{ offering.expected_rate_of_return }}%</td>
+                                </tr>
+                                <tr>
+                                    <td class="align-left">{% trans "Type of property" %}</td>
+                                    <td class="align-right">{{ offering.investment_type }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="align-left">{% trans "Min. investment amt." %}</td>
+                                    <td class="align-right">{{ offering.minimal_investment_amount }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="align-left">{% trans "Hold term" %}</td>
+                                    <td class="align-right">{{ offering.investment_period_months }} {% trans "months" %}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-        </form>
-    </section>
-    <section class="wrapper">
-        {% for offering in object_list %}
-            <div class="4u 12u$(xsmall)">
-                <div class="table-wrapper">
-                    <table>
-                        <tbody class="align-center">
-                        <tr>
-                            <td colspan="2">
-                                <div class="image">
-                                    {% thumbnail offering.images.first "x200" crop="center" as im %}
-                                        <a href="{% url "project_detail_slug" offering.pk offering.slug %}"
-                                           title="{{ offering.title }}">
-                                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"
-                                                 alt="{{ offering.title }}" title="{{ offering.title }}">
-                                        </a>
-                                    {% endthumbnail %}
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><a href="{% url "project_detail_slug" offering.pk offering.slug %}"
-                                               title="{{ offering.title }}">{{ offering.title }}</a></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <progress
-                                        title="{{ offering.get_currently_invested_total_sum.amount }} / {{ offering.goal.amount }}"
-                                        value="{{ offering.get_currently_invested_total_sum.amount }}"
-                                        max="{{ offering.goal.amount }}"></progress>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="align-left">{% trans "Target raise" %}</td>
-                            <td class="align-right">{{ offering.goal }}</td>
-                        </tr>
-                        <tr>
-                            <td class="align-left">{% trans "Time left" %}</td>
-                            <td class="align-right">{{ offering.deadline|timeuntil }}</td>
-                        </tr>
-                        <tr>
-                            <td class="align-left">{% trans "Ann. return" %}</td>
-                            <td class="align-right">{{ offering.expected_rate_of_return }}%</td>
-                        </tr>
-                        <tr>
-                            <td class="align-left">{% trans "Type of property" %}</td>
-                            <td class="align-right">{{ offering.investment_type }}</td>
-                        </tr>
-                        <tr>
-                            <td class="align-left">{% trans "Min. investment amt." %}</td>
-                            <td class="align-right">{{ offering.minimal_investment_amount }}</td>
-                        </tr>
-                        <tr>
-                            <td class="align-left">{% trans "Hold term" %}</td>
-                            <td class="align-right">{{ offering.investment_period_months }} {% trans "months" %}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        {% endfor %}
+        </section>
     </section>
 {% endblock %}

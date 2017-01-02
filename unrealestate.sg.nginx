@@ -11,6 +11,16 @@ server {
 
     client_max_body_size 20M;
 
+    location /media/uploads/videos {
+        alias /home/unrealestate/unrealestate-web/media/uploads/videos;
+        mp4;
+        mp4_buffer_size 4M;
+        mp4_max_buffer_size 10M;
+        limit_rate 260k;
+        limit_rate_after 3m;
+    }
+
+
     location /static {
         alias /home/unrealestate/unrealestate-web/static-cache;
         expires 7d;

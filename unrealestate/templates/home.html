@@ -39,7 +39,7 @@
         </header>
     </section>
     {% for project in sample_projects %}
-        <section class="wrapper style1 spotlight alt">
+        <section class="wrapper style1 spotlight {% cycle 'alt' '' %}">
             <div class="content">
                 <div class="inner">
                     <h2>{{ project.title }}</h2>

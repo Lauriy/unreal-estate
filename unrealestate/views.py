@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
+from django.db.models import Sum, Count
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
@@ -174,14 +175,43 @@ class OfferingsView(ListView):
     model = Project
     paginate_by = 12
 
+    def get_queryset(self):
+        qs = super(OfferingsView, self).get_queryset()
+        search_form = HaystackProjectSearchForm(self.request.GET)
+        if search_form.is_valid():
+            if search_form.cleaned_data['type']:
+                qs = qs.filter(investment_type=search_form.cleaned_data['type'])
+            if search_form.cleaned_data['country']:
+                qs = qs.filter(country=search_form.cleaned_data['country'])
+            if search_form.cleaned_data['city']:
+                qs = qs.filter(city=search_form.cleaned_data['city'])
+            if search_form.cleaned_data['district']:
+                qs = qs.filter(district=search_form.cleaned_data['district'])
+            if search_form.cleaned_data['date_added_from']:
+                qs = qs.filter(created__gte=search_form.cleaned_data['date_added_from'])
+            if search_form.cleaned_data['date_added_until']:
+                qs = qs.filter(created__lte=search_form.cleaned_data['date_added_until'])
+            if search_form.cleaned_data['goal_from']:
+                qs = qs.filter(goal__gte=search_form.cleaned_data['goal_from'])
+            if search_form.cleaned_data['goal_up_to']:
+                qs = qs.filter(goal__lte=search_form.cleaned_data['goal_up_to'])
+            if search_form.cleaned_data['q']:
+                search_query_set = search_form.search()
+                results = [r.pk for r in search_query_set]
+                qs = qs.filter(pk__in=results)
+        qs = qs.annotate(invested_sum=Sum('investments__value'))
+        qs = qs.annotate(investors=Count('investments__user', distinct=True))
+
+        return qs
+
     def get_context_data(self, **kwargs):
         context = super(OfferingsView, self).get_context_data(**kwargs)
         search_form = HaystackProjectSearchForm(self.request.GET)
-        if search_form.is_valid() and search_form.cleaned_data['q']:
-            search_query_set = search_form.search()
-            results = [r.pk for r in search_query_set]
-            offerings = self.get_queryset().filter(pk__in=results)
-            context['object_list'] = offerings
+        search_form.is_valid()
         context['form'] = search_form
 
         return context
+
+
+class SellYourPropertyView(TemplateView):
+    template_name = 'sell_your_property.html'

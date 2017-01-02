@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'django_comments',
-    'django_comments_xtd'
+    'django_comments_xtd',
 ]
 
 MIDDLEWARE = [
@@ -88,6 +88,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+ACCOUNT_SIGNUP_FORM_CLASS = 'unrealestate.forms.SignupForm'
 
 LANGUAGE_CODE = 'en'
 

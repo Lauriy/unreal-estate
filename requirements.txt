@@ -1,9 +1,9 @@
 Django==1.10.4
 psycopg2==2.6.2
-django-allauth==0.29.0
+django-allauth==0.30.0
 django-compressor==2.1
 sorl-thumbnail==12.4a1
-django-money==0.10
+django-money==0.10.1
 django-ckeditor==5.1.1
 django-contrib-comments==1.7.3
 django-comments-xtd==1.6.3

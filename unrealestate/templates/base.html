@@ -32,8 +32,12 @@
             <li class="{% if request.resolver_match.url_name == "offerings" %}active{% endif %}">
                 <a title="{% trans "Offerings" %}" href="{% url "offerings" %}">{% trans "Offerings" %}</a>
             </li>
+            <li class="{% if request.resolver_match.url_name == "sell_your_property" %}active{% endif %}">
+                <a title="{% trans "Sell your property" %}" href="{% url "sell_your_property" %}">{% trans "Sell property" %}</a>
+            </li>
             <li>
-                <a title="{% trans "How it works" %}" href="{% url "home" %}#how-it-works-wrapper">{% trans "How it works" %}</a>
+                <a title="{% trans "How it works" %}"
+                   href="{% url "home" %}#how-it-works-wrapper">{% trans "How it works" %}</a>
             </li>
             <li class="{% if request.resolver_match.url_name == "faq" %}active{% endif %}">
                 <a title="{% trans "Frequently asked questions" %}" href="{% url "faq" %}">{% trans "FAQ" %}</a>
@@ -88,7 +92,8 @@
     </ul>
     <ul class="joined-icons">
         <li>
-            <a href="https://www.facebook.com/UnrealEstateLtd/" title="{% trans "Unreal Estate on Facebook" %}" class="icon fa-facebook">
+            <a href="https://www.facebook.com/UnrealEstateLtd/" title="{% trans "Unreal Estate on Facebook" %}"
+               class="icon fa-facebook">
                 <span class="label">{% trans "Facebook" %}</span>
             </a>
         </li>
