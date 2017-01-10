@@ -1,6 +1,6 @@
 from django.conf import settings
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.mail import send_mail
 from django.db.models import Sum, Count
 from django.urls import reverse
@@ -112,6 +112,13 @@ class ProfileWithdrawFundsView(FormView, LoginRequiredMixin):
         return super(ProfileWithdrawFundsView, self).form_valid(form)
 
 
+def user_is_verified_test(user):
+    return user.verified
+
+
+investment_decorators = [login_required, user_passes_test(user_is_verified_test)]
+
+
 class ProjectDetailView(DetailView):
     model = Project
 
@@ -123,7 +130,7 @@ class ProjectDetailView(DetailView):
         return context
 
     # Don't remove unused args, kwargs
-    @method_decorator(login_required)
+    @method_decorator(investment_decorators)
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = InvestmentForm(request.POST, user=request.user, project=self.object)
@@ -213,5 +220,8 @@ class OfferingsView(ListView):
         return context
 
 
-class SellYourPropertyView(TemplateView):
+class SellYourPropertyView(TemplateView, LoginRequiredMixin, UserPassesTestMixin):
     template_name = 'sell_your_property.html'
+
+    def test_func(self):
+        return self.request.user.verified

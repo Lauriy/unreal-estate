@@ -11,6 +11,7 @@ from djmoney.models.fields import MoneyField
 
 class User(AbstractUser):
     interest_in_site = ForeignKey('UserInterestInSite', related_name='users', blank=True, null=True)
+    verified = BooleanField(default=False)
 
     # TODO: In the future, cache this
     def get_account_balance(self):
