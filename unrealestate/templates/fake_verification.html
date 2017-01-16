@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    <div class="12u$">
+        {% trans "Pretending to analyze your documents..." %} <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        (function ($) {
+            'use strict';
+            /*jslint nomen: true*/
+            /*jslint browser: true*/
+            var profileUrl = '{% url "account_profile" %}';
+            $(document).ready(function () {
+                setTimeout(function () {
+                    window.location = profileUrl;
+                }, 3000);
+            });
+        }(jQuery));
+    </script>
+{% endblock %}

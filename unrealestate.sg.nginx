@@ -5,7 +5,7 @@ upstream unrealestate_app_server {
 server {
     listen 80 default_server;
 
-    server_name www.unrealestate.sg unrealestate.sg;
+    server_name www.unrealestate.triinjalauri.ee unrealestate.triinjalauri.ee;
 
     keepalive_timeout 10;
 
@@ -20,6 +20,9 @@ server {
         limit_rate_after 3m;
     }
 
+    location ~ ^/favicon.(\w*)$ {
+        alias /home/unrealestate/unrealestate-web/static-cache/favicon.$1;
+    }
 
     location /static {
         alias /home/unrealestate/unrealestate-web/static-cache;

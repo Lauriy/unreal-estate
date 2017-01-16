@@ -1,0 +1,110 @@
+{% extends 'profile.html' %}
+
+{% load i18n %}
+
+{% block profile_sub_content %}
+    <h2>{% trans "Verify your account" %}</h2>
+    <h4>{% trans "This is a demo site so the form only pretends to check your data." %}</h4>
+    <form method="post" action="." enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <fieldset>
+            <legend><b>{% trans "Personal information" %}</b></legend>
+            <div class="row uniform">
+                <div class="6u 12u$(xsmall)">
+                    {{ form.first_name.label_tag }}
+                    {{ form.first_name }}
+                    {{ form.first_name.errors }}
+                </div>
+                <div class="6u$ 12u$(xsmall)">
+                    {{ form.last_name.label_tag }}
+                    {{ form.last_name }}
+                    {{ form.last_name.errors }}
+                </div>
+                <div class="6u 12u$(xsmall)">
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                </div>
+                <div class="6u$ 12u$(xsmall)">
+                    {{ form.date_of_birth.label_tag }}
+                    {{ form.date_of_birth }}
+                    {{ form.date_of_birth.errors }}
+                </div>
+                <div class="6u 12u$(xsmall)">
+                    {{ form.gender.label_tag }}
+                    {{ form.gender }}
+                    {{ form.gender.errors }}
+                </div>
+                <div class="6u$ 12u$(xsmall)">
+                    {{ form.nationality.label_tag }}
+                    {{ form.nationality }}
+                    {{ form.nationality.errors }}
+                </div>
+                <div class="6u 12u$(xsmall)">
+                    {{ form.address_line_1.label_tag }}
+                    {{ form.address_line_1 }}
+                    {{ form.address_line_1.errors }}
+                </div>
+                <div class="6u$ 12u$(xsmall)">
+                    {{ form.address_line_2.label_tag }}
+                    {{ form.address_line_2 }}
+                    {{ form.address_line_2.errors }}
+                </div>
+                <div class="6u$ 12u$(xsmall)">
+                    {{ form.phone_number.label_tag }}
+                    {{ form.phone_number }}
+                    {{ form.phone_number.errors }}
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend><b>{% trans "Bank details" %}</b></legend>
+            <div class="row uniform">
+                <div class="6u 12u$(xsmall)">
+                    {{ form.iban.label_tag }}
+                    {{ form.iban }}
+                    {{ form.iban.errors }}
+                </div>
+                <div class="6u$ 12u$(xsmall)">
+                    {{ form.iban_owner.label_tag }}
+                    {{ form.iban_owner }}
+                    {{ form.iban_owner.errors }}
+                </div>
+                <div class="6u 12u$(xsmall)">
+                    {{ form.bic.label_tag }}
+                    {{ form.bic }}
+                    {{ form.bic.errors }}
+                </div>
+                <div class="6u$ 12u$(xsmall)">
+                    {{ form.bank_statement.label_tag }}
+                    {{ form.bank_statement }}
+                    {{ form.bank_statement.errors }}
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend><b>{% trans "Verification" %}</b></legend>
+            <div class="row uniform">
+                <div class="6u 12u$(xsmall)">
+                    {{ form.document_type.label_tag }}
+                    {{ form.document_type }}
+                    {{ form.document_type.errors }}
+                </div>
+                <div class="6u$ 12u$(xsmall)">
+                    {{ form.document.label_tag }}
+                    {{ form.document }}
+                    {{ form.document.errors }}
+                </div>
+            </div>
+        </fieldset>
+        <div class="12u$">
+            <ul class="actions align-right">
+                <li>
+                    <input type="submit" title="{% trans "Submit" %}" value="{% trans "Submit" %}"/>
+                </li>
+            </ul>
+        </div>
+    </form>
+{% endblock %}

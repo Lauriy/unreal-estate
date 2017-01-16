@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from unrealestate.views import HomeView, AboutUsView, FAQView, SignUpView, ProfileEditView, ProjectDetailView, \
     ProfileAddFundsView, ProfileWithdrawFundsView, ProfileTransactionsView, ProfileInvestmentsView, FakeBankView, \
-    OfferingsView, SellYourPropertyView
+    OfferingsView, SellYourPropertyView, ProfileVerificationView, FakeVerificationView
 
 urlpatterns = [
     url(r'^$', HomeView.as_view(), name='home'),
@@ -41,4 +41,6 @@ urlpatterns += i18n_patterns(
     url(_(r'^accounts/transactions/fake-bank/$'), FakeBankView.as_view(), name='account_fake_bank'),
     url(_(r'^accounts/withdraw-funds/$'), ProfileWithdrawFundsView.as_view(), name='account_withdraw_funds'),
     url(_(r'^accounts/investments/$'), ProfileInvestmentsView.as_view(), name='account_investments'),
+    url(_(r'^accounts/verify/$'), ProfileVerificationView.as_view(), name='account_verify'),
+    url(_(r'^accounts/verify/fake/$'), FakeVerificationView.as_view(), name='account_fake_verify'),
 )

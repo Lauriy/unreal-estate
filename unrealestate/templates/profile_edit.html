@@ -1,9 +1,30 @@
 {% extends 'profile.html' %}
 
-{% load i18n %}
+{% load i18n socialaccount %}
 
 {% block profile_sub_content %}
+    {% if not user.verified %}
+        <b>
+            {% url 'account_verify' as verification_form %}
+            {% blocktrans %}
+                To complete the verification process, please visit
+                <a title="Verify your account" href="{{ verification_form }}">here</a> and fill out the form.
+            {% endblocktrans %}
+        </b>
+    {% endif %}
     <h3>{% trans "Edit your profile" %}</h3>
+    <h5>
+        {% url 'account_change_password' as change_form %}
+        {% blocktrans %}
+            Change your password <a title="Change password" href="{{ change_form }}">here</a>.
+        {% endblocktrans %}
+    </h5>
+    <h5>
+        <a href="{% provider_login_url "google" process="connect" %}">{% trans "Connect a Google account" %}</a>
+    </h5>
+    <h5>
+        <a href="{% provider_login_url "facebook" process="connect" %}">{% trans "Connect a Facebook account" %}</a>
+    </h5>
     <form method="post" action=".">
         {% csrf_token %}
         {{ form.non_field_errors }}

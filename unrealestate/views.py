@@ -11,7 +11,8 @@ from django.views.generic import ListView
 from django.views.generic import TemplateView
 from django.views.generic import UpdateView
 
-from unrealestate.forms import AddFundsForm, WithdrawFundsForm, FAQForm, InvestmentForm, HaystackProjectSearchForm
+from unrealestate.forms import AddFundsForm, WithdrawFundsForm, FAQForm, InvestmentForm, HaystackProjectSearchForm, \
+    VerificationForm
 from unrealestate.models import User, Project, Transaction, Investment
 
 
@@ -62,7 +63,7 @@ class SignUpView(TemplateView):
     template_name = 'sign_up.html'
 
 
-class ProfileEditView(UpdateView, LoginRequiredMixin):
+class ProfileEditView(LoginRequiredMixin, UpdateView):
     template_name = 'profile_edit.html'
     model = User
     fields = ['first_name', 'last_name', 'interest_in_site']
@@ -74,9 +75,10 @@ class ProfileEditView(UpdateView, LoginRequiredMixin):
         return reverse('account_profile')
 
 
-class ProfileAddFundsView(FormView, LoginRequiredMixin):
+class ProfileAddFundsView(UserPassesTestMixin, FormView):
     template_name = 'profile_add_funds.html'
     form_class = AddFundsForm
+    login_url = 'account_verify'
 
     def form_valid(self, form):
         Transaction(
@@ -89,10 +91,14 @@ class ProfileAddFundsView(FormView, LoginRequiredMixin):
     def get_success_url(self):
         return reverse('account_fake_bank')
 
+    def test_func(self):
+        return self.request.user.is_authenticated() and self.request.user.verified
 
-class ProfileWithdrawFundsView(FormView, LoginRequiredMixin):
+
+class ProfileWithdrawFundsView(UserPassesTestMixin, FormView):
     template_name = 'profile_withdraw_funds.html'
     form_class = WithdrawFundsForm
+    login_url = 'account_verify'
 
     def get_form_kwargs(self):
         kwargs = super(ProfileWithdrawFundsView, self).get_form_kwargs()
@@ -110,6 +116,9 @@ class ProfileWithdrawFundsView(FormView, LoginRequiredMixin):
             amount=form.cleaned_data['amount']
         ).save()
         return super(ProfileWithdrawFundsView, self).form_valid(form)
+
+    def test_func(self):
+        return self.request.user.is_authenticated() and self.request.user.verified
 
 
 def user_is_verified_test(user):
@@ -156,9 +165,14 @@ class FakeBankView(TemplateView):
     template_name = 'fake_bank.html'
 
 
-class ProfileTransactionsView(ListView, LoginRequiredMixin):
+class FakeVerificationView(TemplateView):
+    template_name = 'fake_verification.html'
+
+
+class ProfileTransactionsView(UserPassesTestMixin, ListView):
     model = Transaction
     paginate_by = 10
+    login_url = 'account_verify'
 
     def get_queryset(self):
         return self.request.user.transactions.all()
@@ -169,13 +183,20 @@ class ProfileTransactionsView(ListView, LoginRequiredMixin):
 
         return context
 
+    def test_func(self):
+        return self.request.user.is_authenticated() and self.request.user.verified
 
-class ProfileInvestmentsView(ListView, LoginRequiredMixin):
+
+class ProfileInvestmentsView(UserPassesTestMixin, ListView):
     model = Investment
     paginate_by = 10
+    login_url = 'account_verify'
 
     def get_queryset(self):
         return self.request.user.investments.all()
+
+    def test_func(self):
+        return self.request.user.is_authenticated() and self.request.user.verified
 
 
 class OfferingsView(ListView):
@@ -220,8 +241,28 @@ class OfferingsView(ListView):
         return context
 
 
-class SellYourPropertyView(TemplateView, LoginRequiredMixin, UserPassesTestMixin):
+class SellYourPropertyView(UserPassesTestMixin, TemplateView):
     template_name = 'sell_your_property.html'
+    login_url = 'account_verify'
 
     def test_func(self):
-        return self.request.user.verified
+        return self.request.user.is_authenticated() and self.request.user.verified
+
+
+class ProfileVerificationView(LoginRequiredMixin, FormView):
+    template_name = 'profile_verify.html'
+    form_class = VerificationForm
+
+    def get_form_kwargs(self):
+        kwargs = super(ProfileVerificationView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+
+        return kwargs
+
+    def get_success_url(self):
+        return reverse('account_fake_verify')
+
+    def form_valid(self, form):
+        self.request.user.verified = True
+        self.request.user.save()
+        return super(ProfileVerificationView, self).form_valid(form)

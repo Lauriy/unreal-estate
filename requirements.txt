@@ -14,3 +14,6 @@ Pillow==4.0.0
 django-debug-toolbar==1.6
 django-haystack==2.6.0
 Whoosh==2.7.4
+django-countries==4.0
+django-phonenumber-field==1.1.0
+django-localflavor==1.4.1
