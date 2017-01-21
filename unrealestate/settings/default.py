@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django_comments_xtd',
     'django_countries',
     'phonenumber_field',
-    'localflavor'
+    'localflavor',
+    'django_cleanup'
 ]
 
 MIDDLEWARE = [
@@ -135,10 +136,10 @@ COMMENTS_APP = 'django_comments_xtd'
 COMMENTS_XTD_MAX_THREAD_LEVEL = 1
 COMMENTS_XTD_CONFIRM_EMAIL = True
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'laurileet@gmail.com'
-EMAIL_HOST_PASSWORD = ''
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = '587'
+# EMAIL_HOST_USER = 'laurileet@gmail.com'
+# EMAIL_HOST_PASSWORD = ''
 DEFAULT_FROM_EMAIL = 'Unreal Estate <info@unrealestate.sg>'
 
 AUTH_USER_MODEL = 'unrealestate.User'
@@ -163,3 +164,10 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+ADMINS = [
+    ('Karl Vään', 'vaankarl@gmail.com'),
+    ('Taavi Pettai', 'pettaitaavi@gmail.com'),
+    ('Timo Kaus', 'timo.kaus@gmail.com'),
+    ('Lauri Elias', 'laurileet@gmail.com')
+]

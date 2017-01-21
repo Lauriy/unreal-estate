@@ -1,6 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.forms import Form, CharField, EmailField, Textarea, ModelChoiceField, TextInput, DateField, ChoiceField, \
-    FileField
+    FileField, ModelForm, ImageField, inlineformset_factory
 from django.utils.translation import ugettext_lazy as _
 from django_countries import countries
 from django_countries.fields import LazyTypedChoiceField
@@ -9,8 +9,9 @@ from haystack.forms import SearchForm
 from localflavor.generic.countries.sepa import IBAN_SEPA_COUNTRIES
 from localflavor.generic.forms import IBANFormField, BICFormField
 from phonenumber_field.formfields import PhoneNumberField
+from multiupload.fields import MultiImageField
 
-from unrealestate.models import Project, InvestmentType, Country, City, District, UserInterestInSite
+from unrealestate.models import Project, InvestmentType, Country, City, District, UserInterestInSite, ProjectProposal, ProjectProposalImage
 
 
 class SignupForm(Form):
@@ -128,3 +129,16 @@ class VerificationForm(Form):
         self.initial['first_name'] = self.user.first_name
         self.initial['last_name'] = self.user.last_name
         self.initial['email'] = self.user.email
+
+
+class SellPropertyForm(ModelForm):
+    pictures = MultiImageField(min_num=1, max_num=5, max_file_size=1024*1024*5, label=_('Up to 5 images'))
+
+    class Meta:
+        model = ProjectProposal
+        fields = ['name', 'location', 'preferred_price', 'short_description', 'size', 'type', 'tenancy',
+                  'tenancy_agreement_length']
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(SellPropertyForm, self).__init__(*args, **kwargs)

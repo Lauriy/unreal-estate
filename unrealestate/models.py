@@ -3,7 +3,7 @@ from uuid import uuid4
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import AbstractUser
 from django.db.models import Model, CharField, TextField, FileField, ImageField, BooleanField, ForeignKey, \
-    DateTimeField, IntegerField, DecimalField, SlugField, PositiveSmallIntegerField, UUIDField
+    DateTimeField, IntegerField, DecimalField, SlugField, PositiveSmallIntegerField, UUIDField, URLField
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from djmoney.models.fields import MoneyField
@@ -78,6 +78,7 @@ class Project(Model):
     slug = SlugField()
     description = TextField()
     video = FileField(upload_to='uploads/videos/', null=True, blank=True)
+    matterport_url = URLField(blank=True, null=True)
     is_allowed_on_home_page = BooleanField(default=False)
     goal = MoneyField(max_digits=12, decimal_places=2, default_currency='SGD')
     minimal_investment_amount = MoneyField(max_digits=12, decimal_places=2, default_currency='SGD')
@@ -157,3 +158,30 @@ class Investment(Model):
 
     def __str__(self):
         return ' - '.join([str(self.token), self.project.title, self.user.username])
+
+
+class ProjectProposal(Model):
+    user = ForeignKey('User', related_name='project_proposals')
+    name = CharField(max_length=255)
+    location = CharField(max_length=255)
+    preferred_price = MoneyField(max_digits=12, decimal_places=2, default_currency='SGD')
+    short_description = TextField()
+    type = ForeignKey('AssetClass', related_name='project_proposals')
+    size = CharField(max_length=255)
+    tenancy = BooleanField(default=False)
+    tenancy_agreement_length = CharField(max_length=255)
+    created = DateTimeField(auto_now_add=True)
+    modified = DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+
+class ProjectProposalImage(Model):
+    project_proposal = ForeignKey('ProjectProposal', related_name='pictures')
+    image = ImageField(upload_to='uploads/images/')
+    created = DateTimeField(auto_now_add=True)
+    modified = DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.image.name

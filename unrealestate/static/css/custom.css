@@ -16,6 +16,19 @@
     margin-bottom: 3em;
 }
 
+#unreal-estate-project-detail-matterport {
+    width: 80%;
+    position: relative;
+    margin: auto;
+    margin-bottom: 3em;
+}
+
+#unreal-estate-project-detail-matterport iframe {
+    width: 100%;
+    border-radius: 0.5em;
+    border: solid 1.5em #fff;
+}
+
 .unreal-estate-project-detail-circles-container {
     background-color: #ffffff;
     color: #6e6e6e;

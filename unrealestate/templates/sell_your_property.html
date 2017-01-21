@@ -3,5 +3,63 @@
 {% load i18n %}
 
 {% block content %}
-    {{ user.verified }}
+    <h3>{% trans "Sell your property" %}</h3>
+    <form method="post" action="." enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="row uniform">
+            <div class="6u 12u$(xsmall)">
+                {{ form.name.label_tag }}
+                {{ form.name }}
+                {{ form.name.errors }}
+            </div>
+            <div class="6u$ 12u$(xsmall)">
+                {{ form.location.label_tag }}
+                {{ form.location }}
+                {{ form.location.errors }}
+            </div>
+            <div class="12u$ 12u$(xsmall)">
+                {{ form.short_description.label_tag }}
+                {{ form.short_description }}
+                {{ form.short_description.errors }}
+            </div>
+            <div class="6u 12u$(xsmall)">
+                {{ form.type.label_tag }}
+                {{ form.type }}
+                {{ form.type.errors }}
+            </div>
+            <div class="6u$ 12u$(xsmall)">
+                {{ form.size.label_tag }}
+                {{ form.size }}
+                {{ form.size.errors }}
+            </div>
+            <div class="6u 12u$(xsmall)">
+                {{ form.tenancy.label_tag }}
+                {{ form.tenancy }}
+                {{ form.tenancy.errors }}
+            </div>
+            <div class="6u$ 12u$(xsmall)">
+                {{ form.tenancy_agreement_length.label_tag }}
+                {{ form.tenancy_agreement_length }}
+                {{ form.tenancy_agreement_length.errors }}
+            </div>
+            <div class="6u$ 12u$(xsmall)">
+                {{ form.preferred_price.label_tag }}
+                {{ form.preferred_price }}
+                {{ form.preferred_price.errors }}
+            </div>
+            <div class="12u$ 12u$(xsmall)">
+                {{ form.pictures.label_tag }}
+                {{ form.pictures }}
+                {{ form.pictures.errors }}
+            </div>
+            <div class="12u$">
+                <ul class="actions align-right">
+                    <li>
+                        <input type="submit" title="{% trans "Submit" %}" value="{% trans "Submit" %}"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
 {% endblock %}

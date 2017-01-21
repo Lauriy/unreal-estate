@@ -9,7 +9,7 @@ from unrealestate.views import HomeView, AboutUsView, FAQView, SignUpView, Profi
     OfferingsView, SellYourPropertyView, ProfileVerificationView, FakeVerificationView
 
 urlpatterns = [
-    url(r'^$', HomeView.as_view(), name='home'),
+    url(r'^$', HomeView.as_view(), name='home_no_locale'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^accounts/profile/', ProfileEditView.as_view(), name='account_profile'),

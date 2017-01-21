@@ -30,6 +30,12 @@
                     <video title="{{ object.title }}" src="{{ object.video.url }}" controls></video>
                 </div>
             {% endif %}
+            {% if object.matterport_url %}
+                <div id="unreal-estate-project-detail-matterport" class="video">
+                    <iframe width="853" height="480" src="{{ object.matterport_url }}" frameborder="0"
+                            allowfullscreen></iframe>
+                </div>
+            {% endif %}
             <div class="slider">
                 <span class="nav-previous"></span>
                 <div class="viewer">

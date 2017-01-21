@@ -1,10 +1,12 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.core.mail import send_mail
+from django.core.mail import send_mail, send_mass_mail
 from django.db.models import Sum, Count
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
+from django.views.generic import CreateView
 from django.views.generic import DetailView
 from django.views.generic import FormView
 from django.views.generic import ListView
@@ -12,8 +14,8 @@ from django.views.generic import TemplateView
 from django.views.generic import UpdateView
 
 from unrealestate.forms import AddFundsForm, WithdrawFundsForm, FAQForm, InvestmentForm, HaystackProjectSearchForm, \
-    VerificationForm
-from unrealestate.models import User, Project, Transaction, Investment
+    VerificationForm, SellPropertyForm
+from unrealestate.models import User, Project, Transaction, Investment, ProjectProposal, ProjectProposalImage
 
 
 class HomeView(TemplateView):
@@ -128,7 +130,7 @@ def user_is_verified_test(user):
 investment_decorators = [login_required, user_passes_test(user_is_verified_test)]
 
 
-class ProjectDetailView(DetailView):
+class ProjectDetailView(LoginRequiredMixin, DetailView):
     model = Project
 
     def get_context_data(self, **kwargs):
@@ -241,9 +243,34 @@ class OfferingsView(ListView):
         return context
 
 
-class SellYourPropertyView(UserPassesTestMixin, TemplateView):
+class SellYourPropertyView(UserPassesTestMixin, CreateView):
     template_name = 'sell_your_property.html'
     login_url = 'account_verify'
+    model = ProjectProposal
+    form_class = SellPropertyForm
+
+    def form_valid(self, form):
+        new_proposal = form.save(commit=False)
+        new_proposal.user = form.user
+        new_proposal.save()
+        self.object = new_proposal
+        for each in form.cleaned_data['pictures']:
+            ProjectProposalImage.objects.create(project_proposal=self.object, image=each)
+
+        send_mail('New project proposal on Unreal Estate', self.request.build_absolute_uri(reverse('home_no_locale', ))
+                       + 'admin/unrealestate/projectproposal/' + str(self.object.id) + '/', settings.DEFAULT_FROM_EMAIL,
+                       [x[1] for x in settings.ADMINS])
+
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('account_profile')
+
+    def get_form_kwargs(self):
+        kwargs = super(SellYourPropertyView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+
+        return kwargs
 
     def test_func(self):
         return self.request.user.is_authenticated() and self.request.user.verified

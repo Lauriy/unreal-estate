@@ -17,3 +17,5 @@ Whoosh==2.7.4
 django-countries==4.0
 django-phonenumber-field==1.1.0
 django-localflavor==1.4.1
+django-multiupload==0.5.2
+django-cleanup==0.4.2
