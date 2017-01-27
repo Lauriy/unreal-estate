@@ -229,19 +229,18 @@
             </div>
         </div>
     </section>
-    <section id="cta" class="wrapper style3">
+    <section id="cta" class="wrapper">
         <ul class="actions">
             <li>
-                <form method="post" action=".">
+                <form id="unreal-estate-project-detail-invest-form" method="post" action=".">
                     {% csrf_token %}
                     {{ form.non_field_errors }}
                     <div class="row uniform">
                         <div class="6u 12u$(xsmall)">
                             {{ form.amount.errors }}
-                            {{ form.amount.label_tag }}
                             {{ form.amount }}
                         </div>
-                        <div class="6u 12u$(xsmall)">
+                        <div class="6u$ 12u$(xsmall)">
                             <ul class="actions align-right">
                                 <li>
                                     <input type="submit" title="{% trans "Invest" %}" value="{% trans "Invest" %}"/>

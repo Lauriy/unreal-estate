@@ -15,7 +15,7 @@ from django.views.generic import UpdateView
 
 from unrealestate.forms import AddFundsForm, WithdrawFundsForm, FAQForm, InvestmentForm, HaystackProjectSearchForm, \
     VerificationForm, SellPropertyForm
-from unrealestate.models import User, Project, Transaction, Investment, ProjectProposal, ProjectProposalImage
+from unrealestate.models import User, Project, Transaction, Investment, ProjectProposal, ProjectProposalImage, FAQ
 
 
 class HomeView(TemplateView):
@@ -36,6 +36,13 @@ class AboutUsView(TemplateView):
 class FAQView(FormView):
     template_name = 'faq.html'
     form_class = FAQForm
+
+    def get_context_data(self, **kwargs):
+        ctx = super(FAQView, self).get_context_data(**kwargs)
+        ctx['faqs'] = FAQ.objects.all()
+
+        return ctx
+
 
     def get_success_url(self):
         return reverse('faq')
@@ -169,6 +176,13 @@ class FakeBankView(TemplateView):
 
 class FakeVerificationView(TemplateView):
     template_name = 'fake_verification.html'
+
+    def get(self, request, *args, **kwargs):
+        if not self.request.user.verified:
+            self.request.user.verified = True
+            self.request.user.save()
+
+        return super(FakeVerificationView, self).get(request, *args, **kwargs)
 
 
 class ProfileTransactionsView(UserPassesTestMixin, ListView):

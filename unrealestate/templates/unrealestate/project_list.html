@@ -87,9 +87,11 @@
                                             {% thumbnail offering.images.first "300x200" crop="center" as im %}
                                                 <a href="{% url "project_detail_slug" offering.pk offering.slug %}"
                                                    title="{{ offering.title }}">
-                                                    <img src="{{ im.url }}" width="{{ im.width }}"
-                                                         height="{{ im.height }}"
-                                                         alt="{{ offering.title }}" title="{{ offering.title }}">
+                                                    <span class="image fit">
+                                                        <img src="{{ im.url }}" width="{{ im.width }}"
+                                                             height="{{ im.height }}"
+                                                             alt="{{ offering.title }}" title="{{ offering.title }}">
+                                                    </span>
                                                 </a>
                                             {% endthumbnail %}
                                         </div>
@@ -124,12 +126,18 @@
                                     <td class="align-right">{{ offering.investment_type }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="align-left">{% trans "Min. investment amt." %}</td>
+                                    <td class="align-left">{% trans "Min. inv. amt." %}</td>
                                     <td class="align-right">{{ offering.minimal_investment_amount }}</td>
                                 </tr>
                                 <tr>
                                     <td class="align-left">{% trans "Hold term" %}</td>
                                     <td class="align-right">{{ offering.investment_period_months }} {% trans "months" %}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <a class="button special small"
+                                           href="{% url 'project_detail_slug' offering.pk offering.slug %}#unreal-estate-project-detail-invest-form">{% trans "Invest now" %}</a>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>

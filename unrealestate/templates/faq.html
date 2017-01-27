@@ -7,9 +7,10 @@
         <h1>{% trans "Frequently asked questions" %}</h1>
     </header>
     <section id="content" class="wrapper">
-        <p>
-            {% trans "We have none yet." %}
-        </p>
+        {% for faq in faqs %}
+            <h3>{{ faq.question }}</h3>
+            <p>{{ faq.answer }}</p>
+        {% endfor %}
     </section>
     <section class="wrapper special">
         <h2>{% trans "Ask and be answered" %}</h2>

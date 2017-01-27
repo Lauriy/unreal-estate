@@ -1,12 +1,15 @@
 from uuid import uuid4
 
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.core.mail import send_mail
 from django.db.models import Model, CharField, TextField, FileField, ImageField, BooleanField, ForeignKey, \
-    DateTimeField, IntegerField, DecimalField, SlugField, PositiveSmallIntegerField, UUIDField, URLField
+    DateTimeField, IntegerField, DecimalField, SlugField, PositiveSmallIntegerField, UUIDField, URLField, Sum
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from djmoney.models.fields import MoneyField
+from moneyed import Money
 
 
 class User(AbstractUser):
@@ -111,6 +114,12 @@ class Project(Model):
     def get_absolute_url(self):
         return reverse('project_detail_slug', args=[str(self.id), self.slug])
 
+    def get_currently_invested_total_sum(self):
+        result = [Money(data['value__sum'], data['value_currency']) for data in
+                  self.investments.values('value_currency').annotate(Sum('value')).order_by()]
+
+        return result[0]
+
 
 class ProjectImage(Model):
     project = ForeignKey('Project', related_name='images')
@@ -159,6 +168,16 @@ class Investment(Model):
     def __str__(self):
         return ' - '.join([str(self.token), self.project.title, self.user.username])
 
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        if self.pk is None:
+            send_mail(
+                'User invested on Unreal Estate demo site',
+                'User ID: %d, project ID: %d' % (self.user.pk, self.project.pk),
+                settings.DEFAULT_FROM_EMAIL,
+                [x[1] for x in settings.ADMINS]
+            )
+        super(Investment, self).save(force_insert, force_update, using, update_fields)
+
 
 class ProjectProposal(Model):
     user = ForeignKey('User', related_name='project_proposals')
@@ -185,3 +204,13 @@ class ProjectProposalImage(Model):
 
     def __str__(self):
         return self.image.name
+
+
+class FAQ(Model):
+    question = CharField(max_length=255)
+    answer = TextField()
+    created = DateTimeField(auto_now_add=True)
+    modified = DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.question
