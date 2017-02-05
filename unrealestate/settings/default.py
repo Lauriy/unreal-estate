@@ -10,7 +10,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['demo.unrealestate.sg']
 
 SITE_ID = 1
 
