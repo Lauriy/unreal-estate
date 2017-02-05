@@ -19,7 +19,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="{% static 'images/apple-icon-144x144.png' %}">
     <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/apple-icon-152x152.png' %}">
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/apple-icon-180x180.png' %}">
-    <link rel="icon" type="image/png" sizes="192x192"  href="{% static 'images/android-icon-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'images/android-icon-192x192.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/favicon-96x96.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
@@ -50,7 +50,8 @@
                 <a title="{% trans "Offerings" %}" href="{% url "offerings" %}">{% trans "Offerings" %}</a>
             </li>
             <li class="{% if request.resolver_match.url_name == "sell_your_property" %}active{% endif %}">
-                <a title="{% trans "Sell your property" %}" href="{% url "sell_your_property" %}">{% trans "Sell property" %}</a>
+                <a title="{% trans "Sell your property" %}"
+                   href="{% url "sell_your_property" %}">{% trans "Sell property" %}</a>
             </li>
             <li>
                 <a title="{% trans "How it works" %}"
@@ -92,7 +93,7 @@
             <h3 class="icon fa-phone major">
                 <span class="label">{% trans "Phone" %}</span>
             </h3>
-            <p>(372) 55-604020</p>
+            <p>+65 98103294</p>
         </li>
         <li>
             <h3 class="icon fa-map major">
@@ -126,6 +127,15 @@
     <!--[if lte IE 8]><script src="{% static "js/ie/respond-1.4.2.js" %}"></script><![endif]-->
     <script src="{% static "js/pixelarity.js" %}"></script>
 {% endcompress %}
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-91454680-1', 'auto');
+    ga('send', 'pageview');
+</script>
 {% block extra_js %}{% endblock %}
 </body>
 </html>

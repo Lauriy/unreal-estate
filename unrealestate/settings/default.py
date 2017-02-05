@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django_countries',
     'phonenumber_field',
     'localflavor',
-    'django_cleanup'
+    'django_cleanup',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
