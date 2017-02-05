@@ -5,7 +5,7 @@ django-compressor==2.1
 sorl-thumbnail==12.4a1
 django-money==0.10.1
 django-ckeditor==5.2.1
-django-contrib-comments==1.7.3
+django-contrib-comments==1.8.0
 django-comments-xtd==1.6.3
 six==1.10.0
 django-markup==1.1
