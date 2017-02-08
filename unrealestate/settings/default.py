@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'localflavor',
     'django_cleanup',
     'django_extensions',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -102,7 +103,7 @@ LANGUAGES = (
     ('en', gettext('English')),
 )
 
-CURRENCIES = ['SGD']
+CURRENCIES = ['SGD', 'USD', 'CNY', 'EUR']
 
 TIME_ZONE = 'UTC'
 

@@ -80,6 +80,7 @@ class Project(Model):
     title = CharField(max_length=255)
     slug = SlugField()
     description = TextField()
+    cover_image = ForeignKey('ProjectImage', related_name='covered_project')
     video = FileField(upload_to='uploads/videos/', null=True, blank=True)
     matterport_url = URLField(blank=True, null=True)
     is_allowed_on_home_page = BooleanField(default=False)
@@ -114,11 +115,14 @@ class Project(Model):
     def get_absolute_url(self):
         return reverse('project_detail_slug', args=[str(self.id), self.slug])
 
-    def get_currently_invested_total_sum(self):
-        result = [Money(data['value__sum'], data['value_currency']) for data in
-                  self.investments.values('value_currency').annotate(Sum('value')).order_by()]
+    # FIXME: WHY DOES THIS NET DUPLICATE QUERIES?
+    @property
+    def currently_invested_total_sum(self):
+        if not hasattr(self, 'currently_invested_total_sum_cache'):
+            self.currently_invested_total_sum_cache = [Money(data['value__sum'], data['value_currency']) for data in
+                  self.investments.values('value_currency').annotate(Sum('value')).order_by()][0]
 
-        return result[0]
+        return self.currently_invested_total_sum_cache
 
 
 class ProjectImage(Model):

@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.core.mail import send_mail, send_mass_mail
+from django.core.mail import send_mail
 from django.db.models import Sum, Count
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -12,6 +12,7 @@ from django.views.generic import FormView
 from django.views.generic import ListView
 from django.views.generic import TemplateView
 from django.views.generic import UpdateView
+from rest_framework.generics import RetrieveAPIView
 
 from unrealestate.forms import AddFundsForm, WithdrawFundsForm, FAQForm, InvestmentForm, HaystackProjectSearchForm, \
     VerificationForm, SellPropertyForm
@@ -23,8 +24,14 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
-        context['sample_projects'] = Project.objects.filter(is_allowed_on_home_page=True)[
+        context['sample_projects'] = Project.objects.filter(is_allowed_on_home_page=True).select_related('cover_image')[
                                      :settings.SAMPLE_PROJECTS_ON_HOME_PAGE]
+        for each in context['sample_projects']:
+            each.percentage_funded = (each.currently_invested_total_sum / each.goal) * 100
+        # context['sample_projects'] = Project.objects.filter(is_allowed_on_home_page=True) \
+        #     .prefetch_related('images') \
+        #     .annotate(total_invested=Sum('investments__value')) \
+        #     [:settings.SAMPLE_PROJECTS_ON_HOME_PAGE]
 
         return context
 
@@ -42,7 +49,6 @@ class FAQView(FormView):
         ctx['faqs'] = FAQ.objects.all()
 
         return ctx
-
 
     def get_success_url(self):
         return reverse('faq')
@@ -272,8 +278,8 @@ class SellYourPropertyView(UserPassesTestMixin, CreateView):
             ProjectProposalImage.objects.create(project_proposal=self.object, image=each)
 
         send_mail('New project proposal on Unreal Estate', self.request.build_absolute_uri(reverse('home_no_locale', ))
-                       + 'admin/unrealestate/projectproposal/' + str(self.object.id) + '/', settings.DEFAULT_FROM_EMAIL,
-                       [x[1] for x in settings.ADMINS])
+                  + 'admin/unrealestate/projectproposal/' + str(self.object.id) + '/', settings.DEFAULT_FROM_EMAIL,
+                  [x[1] for x in settings.ADMINS])
 
         return HttpResponseRedirect(self.get_success_url())
 
@@ -306,4 +312,11 @@ class ProfileVerificationView(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         self.request.user.verified = True
         self.request.user.save()
+
         return super(ProfileVerificationView, self).form_valid(form)
+
+
+class LearnMoreEmailTriggerView(RetrieveAPIView):
+    def retrieve(request, *args, **kwargs):
+        # TODO: Add code that send e-mails to the crew every time someone wants to 'learn more'
+        pass

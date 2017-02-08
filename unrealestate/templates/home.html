@@ -39,21 +39,36 @@
         </header>
     </section>
     {% for project in sample_projects %}
-        <section class="wrapper style1 spotlight {% cycle 'alt' '' %}">
+        <section class="wrapper spotlight {% cycle 'alt' '' %}">
             <div class="content">
                 <div class="inner">
                     <h2>{{ project.title }}</h2>
                     <p align="justify">{{ project.description }}</p>
-                    <ul class="actions">
-                        <li>
-                            <a href="{% url 'project_detail_slug' project.id project.slug %}"
-                               title="{{ project.title }}" class="button">{% trans "Own a share" %}</a>
-                        </li>
-                    </ul>
+                    <p>
+                        <div class="row">
+                            <div class="4u">
+                                {% trans "Goal" %} {{ project.goal }}
+                            </div>
+                            <div class="4u">
+                                {{ project.percentage_funded|floatformat:0 }} {% trans "% funded" %}
+                            </div>
+                            <div class="4u$">
+                                {{ project.currently_invested_total_sum }} {% trans "invested" %}
+                            </div>
+                        </div>
+                    </p>
+                    <div class="row unreal-estate-front-page-view-details-row">
+                        <ul class="actions">
+                            <li>
+                                <a href="{% url 'project_detail_slug' project.id project.slug %}"
+                                   title="{{ project.title }}" class="button">{% trans "View details" %}</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="image">
-                {% thumbnail project.images.first "500x500" crop="center" as im %}
+                {% thumbnail project.cover_image "500x500" crop="center" as im %}
                     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ project.title }}"
                          title="{{ project.title }}">
                 {% endthumbnail %}

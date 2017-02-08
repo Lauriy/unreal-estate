@@ -63,7 +63,7 @@ class InvestmentForm(Form):
         data = self.cleaned_data['amount']
         if self.user.get_account_balance() < data:
             raise ValidationError(_('Insufficient funds'))
-        if self.project.goal - self.project.get_currently_invested_total_sum() < data:
+        if self.project.goal - self.project.currently_invested_total_sum < data:
             raise ValidationError(_('Investment too large, %s left to goal completion'))
 
         return data

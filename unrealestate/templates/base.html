@@ -36,7 +36,7 @@
     <!--[if lte IE 9]><link rel="stylesheet" href="{% static "css/ie9.css" %}" /><![endif]-->
     <!--[if lte IE 8]><link rel="stylesheet" href="{% static "css/ie8.css" %}" /><![endif]-->
 </head>
-<body>
+<body class="{% if request.resolver_match.url_name == "project_detail_slug" or request.resolver_match.url_name == "project_detail_id" %}unreal-estate-white-background{% endif %}">
 <div id="header" class="alt">
     <a class="logo" href="{% url "home" %}" title="{% trans "Back to home page" %}">
         <img alt="{% trans "Unreal Estate logo" %}" src="{% static "images/unreal-estate-logo-small.png" %}">

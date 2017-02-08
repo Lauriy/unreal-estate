@@ -92,7 +92,7 @@
                 <span class="image"><img class="unreal-estate-project-circle" src="{% static "images/pic06.jpg" %}"
                                          alt="{% trans "Investment period" %}"/></span>
                 <h3>{% trans "Investment period" %}</h3>
-                <p>{% blocktrans with months=object.investment_period_months %}{{ months }}months{% endblocktrans %}</p>
+                <p>{% blocktrans with months=object.investment_period_months %}{{ months }} months{% endblocktrans %}</p>
             </li>
             <li>
                 <span class="image">
@@ -103,29 +103,6 @@
                 <p>{{ object.expected_rate_of_return }}%</p>
             </li>
         </ul>
-    </section>
-    <section class="wrapper unreal-estate-project-detail-section">
-        <div class="container">
-            <header class="major">
-                <h2>{% trans "Ask a question" %}</h2>
-            </header>
-            <div class="row">
-                <div id="comments">
-                    {% get_comment_count for object as comment_count %}
-                    {% if comment_count %}
-                        <H4 class="center">{{ comment_count }} comment{{ comment_count|pluralize }}</H4>
-                    {% endif %}
-                    <div id="comment-list">
-                        {% render_comment_list for object %}
-                    </div>
-
-                    <H4 class="center">your comment</H4>
-                    <div id="comment-form">
-                        {% render_comment_form for object %}
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
     <section id="three" class="wrapper unreal-estate-project-detail-section">
         <div class="container">
@@ -248,5 +225,28 @@
                 </form>
             </li>
         </ul>
+    </section>
+    <section class="wrapper unreal-estate-project-detail-section">
+        <div class="container">
+            <header class="major">
+                <h2>{% trans "Ask a question" %}</h2>
+            </header>
+            <div class="row">
+                <div id="comments">
+                    {% get_comment_count for object as comment_count %}
+                    {% if comment_count %}
+                        <H4 class="center">{{ comment_count }} comment{{ comment_count|pluralize }}</H4>
+                    {% endif %}
+                    <div id="comment-list">
+                        {% render_comment_list for object %}
+                    </div>
+
+                    <H4 class="center">your comment</H4>
+                    <div id="comment-form">
+                        {% render_comment_form for object %}
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 {% endblock %}
