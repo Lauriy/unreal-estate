@@ -4,24 +4,35 @@ upstream unrealestate_app_server {
 
 server {
     # Force HTTPS
-    server_name demo.unrealestate.sg;
+    server_name www.unrealestate.sg unrealestate.sg;
     return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443;
+    ssl on;
+
+    ssl_certificate /home/unrealestate/unrealestate-web/unrealestate.sg.crt;
+    ssl_certificate_key /home/unrealestate/unrealestate-web/unrealestate.sg.key;
+
+    server_name www.unrealestate.sg;
+    return 301 https://unrealestate.ee$request_uri;
 }
 
 server {
     listen 443 default_server;
     ssl on;
 
-    ssl_certificate /home/unrealestate/unrealestate-web/demo.unrealestate.sg.crt;
-    ssl_certificate_key /home/unrealestate/unrealestate-web/demo.unrealestate.sg.key;
+    ssl_certificate /home/unrealestate/unrealestate-web/unrealestate.sg.crt;
+    ssl_certificate_key /home/unrealestate/unrealestate-web/unrealestate.sg.key;
 
-    server_name demo.unrealestate.sg;
+    server_name unrealestate.sg;
 
     keepalive_timeout 10;
 
     client_max_body_size 20M;
 
-    if ($host !~* ^(demo.unrealestate.sg)$ ) {
+    if ($host !~* ^(unrealestate.sg)$ ) {
         return 444;
     }
 
