@@ -141,4 +141,5 @@ class SellPropertyForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
+        kwargs.setdefault('label_suffix', '')
         super(SellPropertyForm, self).__init__(*args, **kwargs)

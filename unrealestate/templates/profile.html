@@ -3,24 +3,36 @@
 {% load i18n %}
 
 {% block content %}
-    <div class="12u$">
-        <ul class="actions small align-center">
-            <li>
-                <a href="{% url "account_profile" %}" title="{% trans "Edit your profile" %}" class="button{% if request.resolver_match.url_name == "account_profile" %} special{% endif %}">{% trans "Edit your profile" %}</a>
-            </li>
-            <li>
-                <a href="{% url "account_add_funds" %}" title="{% trans "Deposit funds to your account" %}" class="button{% if request.resolver_match.url_name == "account_add_funds" %} special{% endif %}">{% trans "Add funds" %}</a>
-            </li>
-            <li>
-                <a href="{% url "account_withdraw_funds" %}" title="{% trans "Withdraw earnings" %}" class="button{% if request.resolver_match.url_name == "account_withdraw_funds" %} special{% endif %}">{% trans "Withdraw funds" %}</a>
-            </li>
-            <li>
-                <a href="{% url "account_transactions" %}" title="{% trans "View your transactions" %}" class="button{% if request.resolver_match.url_name == "account_transactions" %} special{% endif %}">{% trans "Transactions" %}</a>
-            </li>
-            <li>
-                <a href="{% url "account_investments" %}" title="{% trans "View your investments" %}" class="button{% if request.resolver_match.url_name == "account_investments" %} special{% endif %}">{% trans "Investments" %}</a>
-            </li>
-        </ul>
-    </div>
-    {% block profile_sub_content %}{% endblock %}
+    <header><h1>{% trans "Your profile" %}</h1></header>
+    <section id="content" class="wrapper">
+        <div class="12u$">
+            <ul class="actions small align-center">
+                <li>
+                    <a href="{% url "account_profile" %}" title="{% trans "Edit your profile" %}"
+                       class="button{% if request.resolver_match.url_name == "account_profile" %} special{% endif %}">{% trans "Edit your profile" %}</a>
+                </li>
+            </ul>
+            <ul class="actions small align-center">
+                <li>
+                    <a href="{% url "account_add_funds" %}" title="{% trans "Deposit funds to your account" %}"
+                       class="button{% if request.resolver_match.url_name == "account_add_funds" %} special{% endif %}">{% trans "Add funds" %}</a>
+                </li>
+                <li>
+                    <a href="{% url "account_withdraw_funds" %}" title="{% trans "Withdraw earnings" %}"
+                       class="button{% if request.resolver_match.url_name == "account_withdraw_funds" %} special{% endif %}">{% trans "Withdraw funds" %}</a>
+                </li>
+            </ul>
+            <ul class="actions small align-center">
+                <li>
+                    <a href="{% url "account_transactions" %}" title="{% trans "View your transactions" %}"
+                       class="button{% if request.resolver_match.url_name == "account_transactions" %} special{% endif %}">{% trans "Transactions" %}</a>
+                </li>
+                <li>
+                    <a href="{% url "account_investments" %}" title="{% trans "View your investments" %}"
+                       class="button{% if request.resolver_match.url_name == "account_investments" %} special{% endif %}">{% trans "Investments" %}</a>
+                </li>
+            </ul>
+        </div>
+        {% block profile_sub_content %}{% endblock %}
+    </section>
 {% endblock %}

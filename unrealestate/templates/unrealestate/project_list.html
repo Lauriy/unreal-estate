@@ -11,55 +11,55 @@
             <form method="get" action=".">
                 <div class="row uniform">
                     {{ form.non_field_errors }}
-                    <div class="6u 12u$(xsmall)">
+                    <div class="6u 12u$(small)">
                         {{ form.q.errors }}
                         {{ form.q.label_tag }}
                         {{ form.q }}
                     </div>
-                    <div class="6u$ 12u$(xsmall)">
+                    <div class="6u$ 12u$(small)">
                         {{ form.type.errors }}
                         {{ form.type.label_tag }}
                         <div class="select-wrapper">
                             {{ form.type }}
                         </div>
                     </div>
-                    <div class="4u 12u$(xsmall)">
+                    <div class="4u 12u$(small)">
                         {{ form.country.errors }}
                         {{ form.country.label_tag }}
                         <div class="select-wrapper">
                             {{ form.country }}
                         </div>
                     </div>
-                    <div class="4u 12u$(xsmall)">
+                    <div class="4u 12u$(small)">
                         {{ form.city.errors }}
                         {{ form.city.label_tag }}
                         <div class="select-wrapper">
                             {{ form.city }}
                         </div>
                     </div>
-                    <div class="4u$ 12u$(xsmall)">
+                    <div class="4u$ 12u$(small)">
                         {{ form.district.errors }}
                         {{ form.district.label_tag }}
                         <div class="select-wrapper">
                             {{ form.district }}
                         </div>
                     </div>
-                    <div class="3u 12u$(xsmall)">
+                    <div class="3u 12u$(small)">
                         {{ form.date_added_from.errors }}
                         {{ form.date_added_from.label_tag }}
                         {{ form.date_added_from }}
                     </div>
-                    <div class="3u 12u$(xsmall)">
+                    <div class="3u 12u$(small)">
                         {{ form.date_added_until.errors }}
                         {{ form.date_added_until.label_tag }}
                         {{ form.date_added_until }}
                     </div>
-                    <div class="3u 12u$(xsmall)">
+                    <div class="3u 12u$(small)">
                         {{ form.goal_from.errors }}
                         {{ form.goal_from.label_tag }}
                         {{ form.goal_from }}
                     </div>
-                    <div class="3u$ 12u$(xsmall)">
+                    <div class="3u$ 12u$(small)">
                         {{ form.goal_up_to.errors }}
                         {{ form.goal_up_to.label_tag }}
                         {{ form.goal_up_to }}
@@ -77,7 +77,7 @@
         <section>
             <div class="row uniform">
                 {% for offering in object_list %}
-                    <div class="4u 12u$(xsmall)">
+                    <div class="4u 12u$(small)">
                         <div class="table-wrapper">
                             <table>
                                 <tbody class="align-center">

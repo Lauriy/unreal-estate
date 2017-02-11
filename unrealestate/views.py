@@ -1,3 +1,5 @@
+from _decimal import DivisionByZero
+
 from django.conf import settings
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -13,10 +15,13 @@ from django.views.generic import ListView
 from django.views.generic import TemplateView
 from django.views.generic import UpdateView
 from rest_framework.generics import RetrieveAPIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 from unrealestate.forms import AddFundsForm, WithdrawFundsForm, FAQForm, InvestmentForm, HaystackProjectSearchForm, \
     VerificationForm, SellPropertyForm
 from unrealestate.models import User, Project, Transaction, Investment, ProjectProposal, ProjectProposalImage, FAQ
+from unrealestate.serializers import ProjectSerializer
 
 
 class HomeView(TemplateView):
@@ -27,7 +32,10 @@ class HomeView(TemplateView):
         context['sample_projects'] = Project.objects.filter(is_allowed_on_home_page=True).select_related('cover_image')[
                                      :settings.SAMPLE_PROJECTS_ON_HOME_PAGE]
         for each in context['sample_projects']:
-            each.percentage_funded = (each.currently_invested_total_sum / each.goal) * 100
+            try:
+                each.percentage_funded = (each.currently_invested_total_sum / each.goal) * 100
+            except DivisionByZero:
+                each.percentage_funded = 0
         # context['sample_projects'] = Project.objects.filter(is_allowed_on_home_page=True) \
         #     .prefetch_related('images') \
         #     .annotate(total_invested=Sum('investments__value')) \
@@ -72,10 +80,6 @@ class FAQView(FormView):
         )
 
         return super(FAQView, self).form_valid(form)
-
-
-class SignUpView(TemplateView):
-    template_name = 'sign_up.html'
 
 
 class ProfileEditView(LoginRequiredMixin, UpdateView):
@@ -159,7 +163,7 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
         self.object = self.get_object()
         form = InvestmentForm(request.POST, user=request.user, project=self.object)
         if form.is_valid():
-            Investment(
+            investment = Investment(
                 user=request.user,
                 project=self.object,
                 value=form.cleaned_data['amount']
@@ -167,6 +171,7 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
             Transaction(
                 user=request.user,
                 type=Transaction.INVESTMENT,
+                investment=investment,
                 amount=form.cleaned_data['amount']
             ).save()
 
@@ -215,7 +220,11 @@ class ProfileInvestmentsView(UserPassesTestMixin, ListView):
     login_url = 'account_verify'
 
     def get_queryset(self):
-        return self.request.user.investments.all()
+        qs = self.request.user.investments.all()
+        for each in qs:
+            each.percentage_of_total = each.value / each.project.goal * 100
+
+        return qs
 
     def test_func(self):
         return self.request.user.is_authenticated() and self.request.user.verified
@@ -317,6 +326,16 @@ class ProfileVerificationView(LoginRequiredMixin, FormView):
 
 
 class LearnMoreEmailTriggerView(RetrieveAPIView):
-    def retrieve(request, *args, **kwargs):
-        # TODO: Add code that send e-mails to the crew every time someone wants to 'learn more'
-        pass
+    permission_classes = (IsAuthenticated,)
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+
+        send_mail("Unreal Estate user clicked 'Learn more'",
+                  'User: %s, project: %s' % (request.user.username, instance.title), request.user.email,
+                  [x[1] for x in settings.ADMINS])
+
+        return Response(serializer.data)

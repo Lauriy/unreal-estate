@@ -119,8 +119,11 @@ class Project(Model):
     @property
     def currently_invested_total_sum(self):
         if not hasattr(self, 'currently_invested_total_sum_cache'):
-            self.currently_invested_total_sum_cache = [Money(data['value__sum'], data['value_currency']) for data in
-                  self.investments.values('value_currency').annotate(Sum('value')).order_by()][0]
+            try:
+                self.currently_invested_total_sum_cache = [Money(data['value__sum'], data['value_currency']) for data in
+                      self.investments.values('value_currency').annotate(Sum('value')).order_by()][0]
+            except IndexError:
+                self.currently_invested_total_sum_cache = 0
 
         return self.currently_invested_total_sum_cache
 
@@ -153,6 +156,7 @@ class Transaction(Model):
     )
     user = ForeignKey('User', related_name='transactions')
     type = PositiveSmallIntegerField(choices=TRANSACTION_TYPE_CHOICES)
+    investment = ForeignKey('Investment', related_name='transactions', null=True, blank=True)
     amount = MoneyField(max_digits=12, decimal_places=2, default_currency='SGD')
     created = DateTimeField(auto_now_add=True)
     modified = DateTimeField(auto_now=True)

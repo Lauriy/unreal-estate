@@ -4,11 +4,6 @@
 }
 
 /* Project detail page */
-.unreal-estate-project-circle {
-    width: 30px;
-    border-radius: 100%;
-}
-
 #unreal-estate-project-detail-video {
     width: 80%;
     position: relative;
@@ -45,6 +40,13 @@
     color: #6e6e6e;
 }
 
+.unreal-estate-project-circle {
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    display: block;
+}
+
 #unreal-estate-project-detail-video > video {
     width: 100%;
     border-radius: 0.5em;
@@ -79,6 +81,18 @@
 
 .unreal-estate-front-page-view-details-row {
     float: right;
+}
+
+.unreal-estate-lagoon-water-background {
+    background-color: #3a7d9a;
+}
+
+.unreal-estate-sand-beige-background {
+    background-color: #c8b89d;
+}
+
+.unreal-estate-midnight-blue-background {
+    background-color: #2b2463;
 }
 
 .unreal-estate-white-background {

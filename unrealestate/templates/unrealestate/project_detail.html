@@ -5,6 +5,11 @@
 {% block extra_js %}
     <script src="{% static "js/jquery.slidertron-1.4.1-dev.min.js" %}"></script>
     {% compress js %}
+        <script>
+            {% if project %}
+                var retrieveProjectUrl = "{% url 'drf-retrieve-project' project.pk %}";
+            {% endif %}
+        </script>
         <script src="{% static "js/unreal-estate-project.js" %}"></script>
     {% endcompress %}
 {% endblock %}
@@ -55,24 +60,24 @@
         <ul class="faces">
             <li>
                 <span class="image">
-                    <img class="unreal-estate-project-circle" src="{% static "images/pic05.jpg" %}"
-                         alt="{% trans "Goal" %}"/>
+                    <span class="unreal-estate-project-circle unreal-estate-lagoon-water-background"
+                          title="{% trans "Goal" %}"></span>
                 </span>
                 <h3>{% trans "Goal" %}</h3>
                 <p>{{ object.goal }}</p>
             </li>
             <li>
                 <span class="image">
-                    <img class="unreal-estate-project-circle" src="{% static "images/pic07.jpg" %}"
-                         alt="{% trans "Deadline" %}"/>
+                    <span class="unreal-estate-project-circle unreal-estate-sand-beige-background"
+                          title="{% trans "Deadline" %}"></span>
                 </span>
                 <h3>{% trans "Deadline" %}</h3>
                 <p>{{ object.deadline }}</p>
             </li>
             <li>
                 <span class="image">
-                    <img class="unreal-estate-project-circle" src="{% static "images/pic07.jpg" %}"
-                         alt="{% trans "Asset class" %}"/>
+                    <span class="unreal-estate-project-circle unreal-estate-midnight-blue-background"
+                          title="{% trans "Asset class" %}"></span>
                 </span>
                 <h3>{% trans "Asset class" %}</h3>
                 <p>{{ object.asset_class }}</p>
@@ -82,22 +87,24 @@
         <ul class="faces">
             <li>
                 <span class="image">
-                    <img class="unreal-estate-project-circle" src="{% static "images/pic05.jpg" %}"
-                         alt="{% trans "Investment type" %}"/>
+                    <span class="unreal-estate-project-circle unreal-estate-midnight-blue-background"
+                          title="{% trans "Investment type" %}"></span>
                 </span>
                 <h3>{% trans "Investment type" %}</h3>
                 <p>{{ object.investment_type }}</p>
             </li>
             <li>
-                <span class="image"><img class="unreal-estate-project-circle" src="{% static "images/pic06.jpg" %}"
-                                         alt="{% trans "Investment period" %}"/></span>
+                <span class="image">
+                    <span class="unreal-estate-project-circle unreal-estate-sand-beige-background"
+                          title="{% trans "Investment period" %}"></span>
+                </span>
                 <h3>{% trans "Investment period" %}</h3>
-                <p>{% blocktrans with months=object.investment_period_months %}{{ months }} months{% endblocktrans %}</p>
+                <p>{% blocktrans with months=object.investment_period_months %}{{ months }}months{% endblocktrans %}</p>
             </li>
             <li>
                 <span class="image">
-                    <img class="unreal-estate-project-circle" src="{% static "images/pic07.jpg" %}"
-                         alt="{% trans "Expected rate of return" %}"/>
+                    <span class="unreal-estate-project-circle unreal-estate-lagoon-water-background"
+                          title="{% trans "Expected rate of return" %}"></span>
                 </span>
                 <h3>{% trans "Expected rate of return" %}</h3>
                 <p>{{ object.expected_rate_of_return }}%</p>
@@ -124,7 +131,8 @@
                         <p>{{ object.analysis_general_intro }}...</p>
                         <ul class="actions">
                             <li>
-                                <a href="#" class="button">{% trans "Learn more" %}</a>
+                                <a href="javascript:;"
+                                   class="button unreal-estate-project-detail-learn-more-button">{% trans "Learn more" %}</a>
                             </li>
                         </ul>
                     </article>
@@ -139,7 +147,8 @@
                         <p>{{ object.analysis_location_intro }}...</p>
                         <ul class="actions">
                             <li>
-                                <a href="#" class="button">{% trans "Learn More" %}</a>
+                                <a href="javascript:;"
+                                   class="button unreal-estate-project-detail-learn-more-button">{% trans "Learn More" %}</a>
                             </li>
                         </ul>
                     </article>
@@ -154,7 +163,8 @@
                         <p>{{ object.analysis_market_intro }}...</p>
                         <ul class="actions">
                             <li>
-                                <a href="#" class="button">{% trans "Learn More" %}</a>
+                                <a href="javascript:;"
+                                   class="button unreal-estate-project-detail-learn-more-button">{% trans "Learn More" %}</a>
                             </li>
                         </ul>
                     </article>
@@ -168,7 +178,9 @@
                         <h3>{% trans "Project Analysis" %}</h3>
                         <p>{{ object.analysis_project_intro }}...</p>
                         <ul class="actions">
-                            <li><a href="#" class="button">{% trans "Learn More" %}</a></li>
+                            <li><a href="javascript:;"
+                                   class="button unreal-estate-project-detail-learn-more-button">{% trans "Learn More" %}</a>
+                            </li>
                         </ul>
                     </article>
                 </div>
@@ -182,7 +194,8 @@
                         <p>{{ object.analysis_financial_intro }}...</p>
                         <ul class="actions">
                             <li>
-                                <a href="#" class="button">{% trans "Learn More" %}</a>
+                                <a href="javascript:;"
+                                   class="button unreal-estate-project-detail-learn-more-button">{% trans "Learn More" %}</a>
                             </li>
                         </ul>
                     </article>
@@ -196,7 +209,9 @@
                         <h3>{% trans "Related Documents" %}</h3>
                         <p>{{ object.analysis_documents_intro }}...</p>
                         <ul class="actions">
-                            <li><a href="#" class="button">{% trans "Learn More" %}</a></li>
+                            <li><a href="javascript:;"
+                                   class="button unreal-estate-project-detail-learn-more-button">{% trans "Learn More" %}</a>
+                            </li>
                         </ul>
                     </article>
                 </div>

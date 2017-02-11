@@ -12,6 +12,7 @@
                 <th>{% trans "Project" %}</th>
                 <th>{% trans "Value" %}</th>
                 <th>{% trans "Obtained" %}</th>
+                <th>{% trans "% of total" %}</th>
             </tr>
             </thead>
             <tbody>
@@ -21,6 +22,7 @@
                     <td>{{ investment.project }}</td>
                     <td>{{ investment.value }}</td>
                     <td>{{ investment.created }}</td>
+                    <td>{{ investment.percentage_of_total|floatformat:2 }}</td>
                 </tr>
             {% endfor %}
             </tbody>

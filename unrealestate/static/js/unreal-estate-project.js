@@ -25,5 +25,13 @@
                 $sliders.trigger('slidertron_reFit');
             }).trigger('resize');
         }
+        $('.unreal-estate-project-detail-learn-more-button').click(function () {
+            $.get({
+                url: window.retrieveProjectUrl,
+                success: function () {
+                    alert('The Unreal Estate team has been notified of your interest. We\'ll reply as soon as we are able.');
+                }
+            });
+        });
     });
 }(jQuery));

@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'localflavor',
     'django_cleanup',
     'django_extensions',
-    'rest_framework'
+    'rest_framework',
+    'djmoney',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'csp.middleware.CSPMiddleware',
 ]
 
 ROOT_URLCONF = 'unrealestate.urls'
@@ -103,7 +105,9 @@ LANGUAGES = (
     ('en', gettext('English')),
 )
 
-CURRENCIES = ['SGD', 'USD', 'CNY', 'EUR']
+# TODO: Not a good topic to spend hours on (adding, subtracting, comparing, auto-conversion)
+# CURRENCIES = ['SGD', 'USD', 'CNY', 'EUR']
+CURRENCIES = ['SGD']
 
 TIME_ZONE = 'UTC'
 
@@ -173,3 +177,20 @@ ADMINS = [
     ('Timo Kaus', 'timo.kaus@gmail.com'),
     ('Lauri Elias', 'laurileet@gmail.com')
 ]
+
+# DJMONEY_AUTO_CONVERT_MONEY = True
+
+# Security hardening
+SESSION_COOKIE_SECURE = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+# DJANGO_MONEY_RATES = {
+#     'DEFAULT_BACKEND': 'djmoney_rates.backends.OpenExchangeBackend',
+#     'OPENEXCHANGE_URL': 'http://openexchangerates.org/api/latest.json',
+#     'OPENEXCHANGE_APP_ID': '92a222f841cb42c3b373394db8dfba4f',
+#     'OPENEXCHANGE_BASE_CURRENCY': 'EUR',
+# }
