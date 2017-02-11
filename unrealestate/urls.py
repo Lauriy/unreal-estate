@@ -17,13 +17,13 @@ urlpatterns = [
     url(r'^accounts/profile/', ProfileEditView.as_view(), name='account_profile'),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^comments/', include('django_comments_xtd.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
 if settings.DEBUG:
     import debug_toolbar
-    # from django.conf.urls.static import static
+    from django.conf.urls.static import static
 
-    # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
     urlpatterns += [
         url(r'^__debug__/', include(debug_toolbar.urls)),

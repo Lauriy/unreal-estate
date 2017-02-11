@@ -2,6 +2,7 @@ from django.core.exceptions import ValidationError
 from django.forms import Form, CharField, EmailField, Textarea, ModelChoiceField, TextInput, DateField, ChoiceField, \
     FileField, ModelForm, ImageField, inlineformset_factory
 from django.utils.translation import ugettext_lazy as _
+from django_comments_xtd.forms import XtdCommentForm
 from django_countries import countries
 from django_countries.fields import LazyTypedChoiceField
 from djmoney.forms import MoneyField
@@ -143,3 +144,9 @@ class SellPropertyForm(ModelForm):
         self.user = kwargs.pop('user', None)
         kwargs.setdefault('label_suffix', '')
         super(SellPropertyForm, self).__init__(*args, **kwargs)
+
+
+class MyCommentForm(XtdCommentForm):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('label_suffix', '')
+        super(MyCommentForm, self).__init__(*args, **kwargs)

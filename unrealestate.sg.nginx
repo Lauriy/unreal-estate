@@ -45,6 +45,11 @@ server {
         limit_rate_after 3m;
     }
 
+    location /media  {
+        alias /home/unrealestate/unrealestate-web/media;
+        expires 7d;
+    }
+
     location ~ ^/favicon.(\w*)$ {
         alias /home/unrealestate/unrealestate-web/static-cache/favicon.$1;
     }

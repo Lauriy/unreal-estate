@@ -28,7 +28,7 @@
     <meta name="msapplication-TileImage" content="{% static 'images/ms-icon-144x144.png' %}">
     <meta name="theme-color" content="#ffffff">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <!--[if lte IE 8]><script src="{% static "js/ie/html5shiv-3.7.3.js" %}"></script><![endif]-->
+    <!--[if lte IE 8]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script><![endif]-->
     {% compress css %}
         <link rel="stylesheet" href="{% static "css/pixelarity.css" %}"/>
         <link rel="stylesheet" href="{% static "css/custom.css" %}"/>
@@ -99,7 +99,8 @@
             <h3 class="icon fa-map major">
                 <span class="label">{% trans "Address" %}</span>
             </h3>
-            <p>{% blocktrans %}11 Marina Boulevard 8,<br/>#11-01, Financial Centre<br/>Marina Bay City Gallery<br/>018940{% endblocktrans %}</p>
+            <p>{% blocktrans %}11 Marina Boulevard 8,<br/>#11-01, Financial Centre<br/>Marina Bay City Gallery<br/>
+                018940{% endblocktrans %}</p>
         </li>
         <li>
             <h3 class="icon fa-envelope major">
@@ -118,13 +119,14 @@
     </ul>
     <p class="copyright">{% blocktrans %}&copy; Unreal Estate. All rights reserved.{% endblocktrans %}</p>
 </div>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.dropotron/1.4.3/jquery.dropotron.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+<!--[if lte IE 8]><script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script><![endif]-->
 {% compress js %}
-    <script src="{% static "js/jquery-1.12.4.js" %}"></script>
-    <script src="{% static "js/jquery.dropotron-1.4.3.js" %}"></script>
     <script src="{% static "js/jquery.scrollex-0.2.1.js" %}"></script>
-    <script src="{% static "js/skel-3.0.1.js" %}"></script>
     <script src="{% static "js/util.js" %}"></script>
-    <!--[if lte IE 8]><script src="{% static "js/ie/respond-1.4.2.js" %}"></script><![endif]-->
     <script src="{% static "js/pixelarity.js" %}"></script>
 {% endcompress %}
 <script>
