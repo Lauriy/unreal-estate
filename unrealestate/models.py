@@ -18,7 +18,7 @@ class User(AbstractUser):
 
     # TODO: In the future, cache this
     def get_account_balance(self):
-        balance = 0
+        balance = Money(0, 'SGD')
         for transaction in self.transactions.all():
             if transaction.type == Transaction.DEPOSIT:
                 balance += transaction.amount

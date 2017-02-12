@@ -250,13 +250,11 @@
                 <div id="comments">
                     {% get_comment_count for object as comment_count %}
                     {% if comment_count %}
-                        <H4 class="center">{{ comment_count }} comment{{ comment_count|pluralize }}</H4>
+                        <h4 class="center">{{ comment_count }} comment{{ comment_count|pluralize }}</h4>
                     {% endif %}
                     <div id="comment-list">
                         {% render_comment_list for object %}
                     </div>
-
-                    <H4 class="center">your comment</H4>
                     <div id="comment-form">
                         {% render_comment_form for object %}
                     </div>
