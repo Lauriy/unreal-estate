@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.sitemaps',
     'haystack',
     'unrealestate',
     'allauth',
@@ -185,8 +186,8 @@ SESSION_COOKIE_SECURE = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
 SECURE_BROWSER_XSS_FILTER = True
-#SECURE_HSTS_SECONDS = 3600
-#SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_SECONDS = 3600
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 # DJANGO_MONEY_RATES = {
 #     'DEFAULT_BACKEND': 'djmoney_rates.backends.OpenExchangeBackend',

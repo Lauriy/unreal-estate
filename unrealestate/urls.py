@@ -2,9 +2,10 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
-from django.conf.urls.static import static
+from django.contrib.sitemaps.views import sitemap
 from django.utils.translation import ugettext_lazy as _
 
+from unrealestate.sitemaps import ProjectSitemap, StaticViewSitemap
 from unrealestate.views import HomeView, AboutUsView, FAQView, ProfileEditView, ProjectDetailView, \
     ProfileAddFundsView, ProfileWithdrawFundsView, ProfileTransactionsView, ProfileInvestmentsView, FakeBankView, \
     OfferingsView, SellYourPropertyView, ProfileVerificationView, FakeVerificationView, LearnMoreEmailTriggerView
@@ -17,6 +18,10 @@ urlpatterns = [
     url(r'^accounts/profile/', ProfileEditView.as_view(), name='account_profile'),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'^comments/', include('django_comments_xtd.urls')),
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': {
+        'projects': ProjectSitemap,
+        'static': StaticViewSitemap
+    }}, name='django.contrib.sitemaps.views.sitemap')
 ]
 
 if settings.DEBUG:
