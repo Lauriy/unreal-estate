@@ -10,7 +10,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['demo.unrealestate.sg']
+ALLOWED_HOSTS = ['unrealestate.sg']
 
 SITE_ID = 1
 
@@ -147,7 +147,7 @@ COMMENTS_XTD_CONFIRM_EMAIL = False
 # EMAIL_PORT = '587'
 # EMAIL_HOST_USER = 'laurileet@gmail.com'
 # EMAIL_HOST_PASSWORD = ''
-DEFAULT_FROM_EMAIL = 'Unreal Estate Demo <info@demo.unrealestate.sg>'
+DEFAULT_FROM_EMAIL = 'Unreal Estate Demo <info@unrealestate.sg>'
 
 AUTH_USER_MODEL = 'unrealestate.User'
 
