@@ -12,8 +12,8 @@ server {
     listen 443;
     ssl on;
 
-    ssl_certificate /home/unrealestate/unrealestate-web/unrealestate.sg.crt;
-    ssl_certificate_key /home/unrealestate/unrealestate-web/unrealestate.sg.key;
+    ssl_certificate /etc/letsencrypt/live/unrealestate.sg/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/unrealestate.sg/privkey.pem;
 
     server_name www.unrealestate.sg;
     return 301 https://unrealestate.sg$request_uri;
@@ -23,8 +23,8 @@ server {
     listen 443 default_server;
     ssl on;
 
-    ssl_certificate /home/unrealestate/unrealestate-web/unrealestate.sg.crt;
-    ssl_certificate_key /home/unrealestate/unrealestate-web/unrealestate.sg.key;
+    ssl_certificate /etc/letsencrypt/live/unrealestate.sg/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/unrealestate.sg/privkey.pem;
 
     server_name unrealestate.sg;
 
